@@ -59,5 +59,9 @@ export const libraryRegistrationRouter = createTRPCRouter({
             //     // select: defaultLibrarySelect,
             // });
             return library
-        })
+        }),
+
+    all: publicProcedure.query(({ ctx }) => {
+        return ctx.prisma.libraryInfo.findMany();
+    })
 })

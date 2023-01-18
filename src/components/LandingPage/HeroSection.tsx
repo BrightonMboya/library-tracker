@@ -16,7 +16,7 @@ const HeroSection = () => {
 
       {showNav && (
         <div className="flex h-screen flex-col items-start gap-10  bg-white pl-5 pt-[5rem] text-xl font-medium text-blue">
-          <Link href="/">
+          <Link href="/libraries">
             <p className="w-screen border-b-[2px] pb-3">Library List</p>
           </Link>
 

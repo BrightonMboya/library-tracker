@@ -9,6 +9,9 @@
 const config = {
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    domains: ["images.unsplash.com"],
+  },
   i18n: {
     locales: ["en"],
     defaultLocale: "en",

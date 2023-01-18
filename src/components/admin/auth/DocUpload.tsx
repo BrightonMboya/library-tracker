@@ -20,7 +20,8 @@ const DocUpload = ({ formData, setFormData }) => {
         <div className="flex h-[150px] w-[300px] cursor-pointer  flex-col items-center justify-center rounded-md border-2 border-dashed border-gray-500">
           <input
             type="file"
-            accept="images/*"
+            name="passport"
+            accept="image/jpeg image/png image/jpg"
             className="absolute h-[100px] border-2 opacity-0"
             onChange={(e: any) => {
               setImageUploaded(e.target.files[0]);

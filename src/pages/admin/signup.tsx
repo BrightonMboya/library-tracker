@@ -1,9 +1,31 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import BasicInfo from "../../components/admin/auth/BasicInfo";
 import DocUpload from "../../components/admin/auth/DocUpload";
 import { inferProcedureInput } from "@trpc/server";
 import { AppRouter } from "../../server/api/root";
 import { api } from "../../utils/api";
+import axios from "axios";
+
+// function to upload to s3
+
+async function uploadToS3(e: ChangeEvent<HTMLFormElement>) {
+  const formData = new FormData(e.target);
+
+  const file = formData.get("passport");
+  if (!file) {
+    return null;
+  }
+
+  //@ts-ignore
+  const fileType = encodeURIComponent(file.type);
+  const { data } = await axios.get(`/api/media?fileType=${fileType}`);
+
+  const { uploadUrl, key } = data;
+
+  await axios.put(uploadUrl, key);
+
+  return key;
+}
 
 const signup = () => {
   const addAdmin = api.adminRouter.add.useMutation();
@@ -23,17 +45,10 @@ const signup = () => {
   };
   const [formData, setFormData] = React.useState(formStates);
 
-  const submitData = async (e: any) => {
+  async function handleSubmit(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
-    try {
-      await fetch("/api/uploadAdminInfo", {
-        method: "POST",
-        body: JSON.stringify(formData),
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    const key = await uploadToS3(e);
+  }
 
   const AuthForm = () => {
     switch (page) {
@@ -46,32 +61,7 @@ const signup = () => {
     }
   };
   return (
-    <form
-      className="flex flex-col items-center"
-      onSubmit={async (e) => {
-        e.preventDefault();
-        type Input = inferProcedureInput<AppRouter["adminRouter"]["add"]>;
-        const input: Input = {
-          passportUrl: formData.passportUrl,
-          email: formData.email,
-          phoneNumber: formData.phoneNumber,
-          country: formData.country,
-          adress: formData.adress,
-          fullName: formData.fullName,
-          password: formData.password,
-          state: formData.state,
-          identityCardUrl: formData.identityCardUrl,
-        };
-
-        try {
-          await addAdmin.mutateAsync(input);
-          setFormData(formStates);
-          setPage(0);
-        } catch (cause) {
-          console.error({ cause }, "Failed to add the Admin");
-        }
-      }}
-    >
+    <form className="flex flex-col items-center" onSubmit={handleSubmit}>
       {AuthForm()}
       {page === 0 && (
         <button

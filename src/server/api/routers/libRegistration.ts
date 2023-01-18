@@ -63,5 +63,23 @@ export const libraryRegistrationRouter = createTRPCRouter({
 
     all: publicProcedure.query(({ ctx }) => {
         return ctx.prisma.libraryInfo.findMany();
-    })
+    }),
+
+    librariesSlug: publicProcedure.query(({ ctx }) => {
+        return ctx.prisma.libraryInfo.findMany({ select: { name: true } });
+    }),
+
+    byId: publicProcedure
+        .input(
+            z.object({
+                id: z.string(),
+            }),
+        )
+        .query(async ({ input }) => {
+            const { id } = input;
+            const library = await prisma.libraryInfo.findUnique({
+                where: { id }
+            });
+            return library
+        })
 })

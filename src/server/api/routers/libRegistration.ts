@@ -1,6 +1,6 @@
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { Prisma } from "@prisma/client";
-import { string, z } from 'zod';
+import { z } from 'zod';
 import { prisma } from "../../db"
 
 const libraryInfoSelect = Prisma.validator<Prisma.LibraryInfoSelect>()({
@@ -83,3 +83,5 @@ export const libraryRegistrationRouter = createTRPCRouter({
             return library
         })
 })
+
+export default libraryRegistrationRouter;

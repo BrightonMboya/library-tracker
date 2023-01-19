@@ -1,9 +1,10 @@
+import React, { ChangeEvent } from "react";
 interface InputProps {
   label: string;
   placeholder: string;
   type: string;
-  onChange: any;
   value: string;
+  onChange: any;
 }
 
 const Input = ({ label, placeholder, type, onChange, value }: InputProps) => {

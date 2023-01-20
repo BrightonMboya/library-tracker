@@ -1,5 +1,6 @@
 import Input from "../../UI/Input";
 import Header from "./Header";
+import { ChangeEvent } from "react";
 
 //@ts-ignore
 export default function BascicInfo({ formData, setFormData }) {
@@ -14,7 +15,7 @@ export default function BascicInfo({ formData, setFormData }) {
         placeholder="National Library of Abuja"
         type="text"
         value={formData.name}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             name: e.target.value,
@@ -26,7 +27,7 @@ export default function BascicInfo({ formData, setFormData }) {
         placeholder="Federal Library"
         type="text"
         value={formData.type}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             type: e.target.value,
@@ -38,7 +39,7 @@ export default function BascicInfo({ formData, setFormData }) {
         placeholder="1985"
         type="text"
         value={formData.yearOfEstablishment}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             yearOfEstablishment: e.target.value,
@@ -50,7 +51,7 @@ export default function BascicInfo({ formData, setFormData }) {
         placeholder="nationlibrary@yahoo.com"
         type="email"
         value={formData.email}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             email: e.target.value,
@@ -63,7 +64,7 @@ export default function BascicInfo({ formData, setFormData }) {
         placeholder="+234784319877"
         type="phonenumber"
         value={formData.phoneNumber}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             phoneNumber: e.target.value,
@@ -76,7 +77,7 @@ export default function BascicInfo({ formData, setFormData }) {
         placeholder="abujaLibrary.com"
         type="text"
         value={formData.website}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             website: e.target.value,
@@ -88,7 +89,7 @@ export default function BascicInfo({ formData, setFormData }) {
         placeholder="7.878134"
         type="text"
         value={formData.latitude}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             latitude: e.target.value,
@@ -100,7 +101,7 @@ export default function BascicInfo({ formData, setFormData }) {
         placeholder="-8.13902"
         type="text"
         value={formData.longitude}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             longitude: e.target.value,
@@ -112,7 +113,7 @@ export default function BascicInfo({ formData, setFormData }) {
         placeholder="Nigeria"
         type="text"
         value={formData.country}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             country: e.target.value,
@@ -124,7 +125,7 @@ export default function BascicInfo({ formData, setFormData }) {
         placeholder="Lagos"
         type="text"
         value={formData.state}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             state: e.target.value,
@@ -136,7 +137,7 @@ export default function BascicInfo({ formData, setFormData }) {
         placeholder="Enter the Adress"
         type="text"
         value={formData.adress}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             adress: e.target.value,
@@ -148,7 +149,7 @@ export default function BascicInfo({ formData, setFormData }) {
         placeholder="Type Here"
         type="text"
         value={formData.extract}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             extract: e.target.value,
@@ -160,7 +161,7 @@ export default function BascicInfo({ formData, setFormData }) {
         placeholder="08:00 hrs"
         type="text"
         value={formData.openingTime}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             openingTime: e.target.value,
@@ -172,7 +173,7 @@ export default function BascicInfo({ formData, setFormData }) {
         placeholder="20:00 Hrs"
         type="text"
         value={formData.closingTime}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             closingTime: e.target.value,

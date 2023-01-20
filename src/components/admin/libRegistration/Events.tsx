@@ -1,5 +1,6 @@
 import Input from "../../UI/Input";
 import Header from "./Header";
+import { ChangeEvent } from "react";
 
 //@ts-ignore
 export default function Events({ formData, setFormData }) {
@@ -15,7 +16,7 @@ export default function Events({ formData, setFormData }) {
         placeholder="Library Tech Summit"
         type="text"
         value={formData.eventsTitle}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             eventsTitle: e.target.value,
@@ -27,7 +28,7 @@ export default function Events({ formData, setFormData }) {
         placeholder="Yes"
         type="text"
         value={formData.eventExtract}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             eventExtract: e.target.value,
@@ -39,7 +40,7 @@ export default function Events({ formData, setFormData }) {
         placeholder="January"
         type="text"
         value={formData.monthOfTheEvent}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             monthOfTheEvent: e.target.value,

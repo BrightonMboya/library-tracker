@@ -4,11 +4,11 @@ import type { NextPage } from "next";
 import Input from "../components/UI/Input";
 import { useRouter } from "next/router";
 import { api } from "../utils/api";
-import { inferProcedureInput } from "@trpc/server";
-import { AppRouter } from "../server/api/root";
+import type { inferProcedureInput } from "@trpc/server";
+import type { AppRouter } from "../server/api/root";
 import { useState } from "react";
 
-const signup: NextPage = () => {
+const Signup: NextPage = () => {
   const router = useRouter();
 
   const createUser = api.user.create.useMutation();
@@ -112,4 +112,4 @@ const signup: NextPage = () => {
   );
 };
 
-export default signup;
+export default Signup;

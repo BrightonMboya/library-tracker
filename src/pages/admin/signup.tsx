@@ -1,8 +1,6 @@
 import React, { ChangeEvent } from "react";
 import BasicInfo from "../../components/admin/auth/BasicInfo";
 import DocUpload from "../../components/admin/auth/DocUpload";
-import { inferProcedureInput } from "@trpc/server";
-import { AppRouter } from "../../server/api/root";
 import { api } from "../../utils/api";
 import axios from "axios";
 
@@ -27,7 +25,7 @@ async function uploadToS3(e: ChangeEvent<HTMLFormElement>) {
   return key;
 }
 
-const signup = () => {
+const Signup = () => {
   const addAdmin = api.adminRouter.add.useMutation();
 
   const [page, setPage] = React.useState(0);
@@ -94,28 +92,4 @@ const signup = () => {
   );
 };
 
-export default signup;
-
-//  onSubmit={async (e) => {
-//         e.preventDefault();
-//         type Input = inferProcedureInput<AppRouter["adminRouter"]["add"]>;
-//         const input: Input = {
-//           passportUrl: formData.passportUrl,
-//           email: formData.email,
-//           phoneNumber: formData.phoneNumber,
-//           country: formData.country,
-//           adress: formData.adress,
-//           fullName: formData.fullName,
-//           password: formData.password,
-//           state: formData.state,
-//           identityCardUrl: formData.identityCardUrl,
-//         };
-
-//         try {
-//           await addAdmin.mutateAsync(input);
-//           setFormData(formStates);
-//           setPage(0);
-//         } catch (cause) {
-//           console.error({ cause }, "Failed to add the Admin");
-//         }
-//       }}
+export default Signup;

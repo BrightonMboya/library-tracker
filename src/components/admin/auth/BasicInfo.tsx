@@ -1,5 +1,5 @@
-import React from "react";
 import Input from "../../UI/Input";
+import { ChangeEvent } from "react";
 
 //@ts-ignore
 const BasicInfo = ({ formData, setFormData }) => {
@@ -13,7 +13,7 @@ const BasicInfo = ({ formData, setFormData }) => {
         label="Full Name"
         placeholder="Segun Favour Aletogibe"
         value={formData.fullName}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             fullName: e.target.value,
@@ -25,7 +25,7 @@ const BasicInfo = ({ formData, setFormData }) => {
         label="Password"
         placeholder="*******"
         value={formData.password}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             password: e.target.value,
@@ -37,7 +37,7 @@ const BasicInfo = ({ formData, setFormData }) => {
         label="Email"
         placeholder="Segun@yahoo.com"
         value={formData.email}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             email: e.target.value,
@@ -49,7 +49,7 @@ const BasicInfo = ({ formData, setFormData }) => {
         placeholder="+234784319877"
         type="phonenumber"
         value={formData.phoneNumber}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             phoneNumber: e.target.value,
@@ -61,7 +61,7 @@ const BasicInfo = ({ formData, setFormData }) => {
         label="Country"
         placeholder="Nigeria"
         value={formData.country}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             country: e.target.value,
@@ -73,7 +73,7 @@ const BasicInfo = ({ formData, setFormData }) => {
         label="State"
         placeholder="Abuja"
         value={formData.state}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             state: e.target.value,
@@ -85,7 +85,7 @@ const BasicInfo = ({ formData, setFormData }) => {
         label="Contact Adress"
         placeholder="Lagos, Nigeria"
         value={formData.adress}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             adress: e.target.value,

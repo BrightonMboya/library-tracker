@@ -1,5 +1,5 @@
-import { inferProcedureInput } from "@trpc/server";
-import { AppRouter } from "../../server/api/root";
+import type { inferProcedureInput } from "@trpc/server";
+import type { AppRouter } from "../../server/api/root";
 import React from "react";
 import {
   BasicInfo,

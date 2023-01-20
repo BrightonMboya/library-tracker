@@ -1,5 +1,6 @@
 import Input from "../../UI/Input";
 import Header from "./Header";
+import { ChangeEvent } from "react";
 //@ts-ignore
 
 export default function StaffInfo({ formData, setFormData }) {
@@ -14,7 +15,7 @@ export default function StaffInfo({ formData, setFormData }) {
         placeholder="45"
         type="text"
         value={formData.numberOfProffesionalStaff}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             numberOfProffesionalStaff: e.target.value,
@@ -26,7 +27,7 @@ export default function StaffInfo({ formData, setFormData }) {
         placeholder="5"
         type="text"
         value={formData.numberOfUnproffessionalStaff}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             numberOfUnproffessionalStaff: e.target.value,
@@ -38,7 +39,7 @@ export default function StaffInfo({ formData, setFormData }) {
         placeholder="5"
         type="text"
         value={formData.numberOfUsers}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             numberOfUsers: e.target.value,

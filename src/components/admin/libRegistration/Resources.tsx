@@ -1,5 +1,6 @@
 import Input from "../../UI/Input";
 import Header from "./Header";
+import { ChangeEvent } from "react";
 //@ts-ignore
 export default function Resources({ formData, setFormData }) {
   return (
@@ -13,7 +14,7 @@ export default function Resources({ formData, setFormData }) {
         placeholder="3000"
         type="text"
         value={formData.numberOfComputerSet}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             numberOfComputerSets: e.target.value,
@@ -25,7 +26,7 @@ export default function Resources({ formData, setFormData }) {
         placeholder="45"
         type="text"
         value={formData.numberOfELibrariesPlartform}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             numberOfELibrariesPlartform: e.target.value,
@@ -37,7 +38,7 @@ export default function Resources({ formData, setFormData }) {
         placeholder="1000"
         type="text"
         value={formData.readingSpaceCapacity}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             readingSpaceCapacity: e.target.value,
@@ -49,7 +50,7 @@ export default function Resources({ formData, setFormData }) {
         placeholder="200"
         type="text"
         value={formData.numberOfReadingTablets}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             numberOfReadingTablets: e.target.value,
@@ -61,7 +62,7 @@ export default function Resources({ formData, setFormData }) {
         placeholder="1205"
         type="text"
         value={formData.numberOfBooks}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             numberOfBooks: e.target.value,
@@ -73,7 +74,7 @@ export default function Resources({ formData, setFormData }) {
         placeholder="205"
         type="text"
         value={formData.numberOfJournals}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             numberOfJournals: e.target.value,

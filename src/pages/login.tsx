@@ -22,14 +22,18 @@ const Login = () => {
           label="Email"
           placeholder="Segun@yahoo.com"
           value=""
-          onChange={() => {}}
+          onChange={() => {
+            console.log("change this fn");
+          }}
         />
         <Input
           type="email"
           label="Password"
           placeholder="*********"
           value=""
-          onChange={() => {}}
+          onChange={() => {
+            console.log("change this fn");
+          }}
         />
 
         <button

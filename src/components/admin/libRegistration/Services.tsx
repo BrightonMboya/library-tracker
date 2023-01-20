@@ -1,5 +1,6 @@
 import Input from "../../UI/Input";
 import Header from "./Header";
+import { ChangeEvent } from "react";
 
 //@ts-ignore
 export default function Services({ formData, setFormData }) {
@@ -14,7 +15,7 @@ export default function Services({ formData, setFormData }) {
         placeholder="Yes"
         type="Text"
         value={formData.internetFacilities}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             internetFacilities: e.target.value,
@@ -26,7 +27,7 @@ export default function Services({ formData, setFormData }) {
         placeholder="Yes"
         type="text"
         value={formData.printAndCopyAccess}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             printAndCopyAccess: e.target.value,
@@ -38,7 +39,7 @@ export default function Services({ formData, setFormData }) {
         placeholder="Yes"
         type="text"
         value={formData.disablePersonUseLibrary}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             disablePersonUseLibrary: e.target.value,
@@ -51,7 +52,7 @@ export default function Services({ formData, setFormData }) {
         placeholder="Yes"
         type="text"
         value={formData.SRHRInfoServices}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             SRHRInfoServices: e.target.value,
@@ -64,7 +65,7 @@ export default function Services({ formData, setFormData }) {
         placeholder="N200,000"
         type="text"
         value={formData.registrationCostPerMonth}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             registrationCostPerMonth: e.target.value,
@@ -76,7 +77,7 @@ export default function Services({ formData, setFormData }) {
         placeholder="Yes"
         type="text"
         value={formData.registrationCostPerYear}
-        onChange={(e: any) => {
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setFormData({
             ...formData,
             registrationCostPerYear: e.target.value,

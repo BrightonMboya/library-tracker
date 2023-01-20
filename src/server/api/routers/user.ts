@@ -1,10 +1,9 @@
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { z } from 'zod';
 import { prisma } from "../../db"
-// import { hash } from "argon2";
+import { hash } from "argon2";
 import { TRPCError } from "@trpc/server";
 
-// import argon2 from 'argon2';
 
 export const loginSchema = z.object({
     email: z.string().email(),
@@ -20,13 +19,17 @@ export type ISignUp = z.infer<typeof signUpSchema>;
 
 
 export const userRouter = createTRPCRouter({
-    signUp: publicProcedure
+    all: publicProcedure.query(({ ctx }) => {
+        return ctx.prisma.user.findMany();
+    }),
+
+    create: publicProcedure
         .input(signUpSchema)
-        .mutation(async ({ input }) => {
+        .mutation(async ({ input, ctx }) => {
             const { fullName, email, password } = input;
 
             // checking if the email exists
-            const exists = await prisma.user.findFirst({
+            const exists = await ctx.prisma.user.findFirst({
                 where: { email }
             });
 
@@ -38,10 +41,9 @@ export const userRouter = createTRPCRouter({
             }
 
             // then hash the fuckin password
-            // const hashedPassword = await hash(password);
-            // const hashedPassword = await argon2.hash(password)
-            const hashedPassword = "";
-            const result = await prisma.user.create({
+            const hashedPassword = await hash(password);
+
+            const result = await ctx.prisma.user.create({
                 data: { fullName, email, password: hashedPassword }
             });
 
@@ -50,8 +52,8 @@ export const userRouter = createTRPCRouter({
                 message: "Account Created Successfully",
                 result: result.email,
             }
-
         })
+
 })
 
 

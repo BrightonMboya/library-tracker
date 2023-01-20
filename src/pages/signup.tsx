@@ -1,30 +1,28 @@
 import Link from "next/link";
-import Input from "../components/UI/Input";
 import { FcGoogle } from "react-icons/fc";
 import type { NextPage } from "next";
-import { useCallback } from "react";
+import Input from "../components/UI/Input";
 import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { signUpSchema, ISignUp } from "../server/api/routers/user";
 import { api } from "../utils/api";
+import { inferProcedureInput } from "@trpc/server";
+import { AppRouter } from "../server/api/root";
+import { useState } from "react";
 
 const signup: NextPage = () => {
   const router = useRouter();
-  const { register, handleSubmit } = useForm<ISignUp>({
-    resolver: zodResolver(signUpSchema),
-  });
 
-  const { mutateAsync } = api.user.signUp.useMutation();
-  const onSubmit = useCallback(
-    async (data: ISignUp) => {
-      const result = await mutateAsync(data);
-      if (result.status === 201) {
-        router.push("/");
-      }
-    },
-    [mutateAsync, router]
-  );
+  const createUser = api.user.create.useMutation();
+  const allUsers = api.user.all.useQuery();
+  // console.log("No Users?", allUsers.data);
+
+  const formStates = {
+    fullName: "",
+    email: "",
+    password: "",
+  };
+
+  const [formData, setFormData] = useState(formStates);
+
   return (
     <div className="mt-5 flex min-h-screen flex-col items-center justify-center">
       <div>
@@ -38,34 +36,63 @@ const signup: NextPage = () => {
           Continue with Google
         </button>
       </div>
-      <form className="mt-5 space-y-5" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col gap-2">
-          <label>Full Name</label>
-          <input
-            type="text"
-            className="w-[250px] rounded-md  bg-grey px-2 py-2  focus:outline-none"
-            placeholder="Dami Dangote"
-            {...register("fullName")}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label>Email</label>
-          <input
-            type="email"
-            className="w-[250px] rounded-md  bg-grey px-2 py-2  focus:outline-none"
-            placeholder="Segun@yahoo.com"
-            {...register("email")}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label>Password</label>
-          <input
-            type="password"
-            className="w-[250px] rounded-md  bg-grey px-2 py-2  focus:outline-none"
-            placeholder="*********"
-            {...register("password")}
-          />
-        </div>
+      <form
+        className="mt-5 space-y-5"
+        onSubmit={async (e) => {
+          e.preventDefault();
+          type Input = inferProcedureInput<AppRouter["user"]["create"]>;
+          const input: Input = {
+            fullName: formData.fullName,
+            email: formData.email,
+            password: formData.password,
+          };
+
+          try {
+            await createUser.mutateAsync(input);
+            setFormData(formStates);
+            router.push("/libraries");
+          } catch (cause) {
+            console.error({ cause }, "Failed to create the user!!");
+          }
+        }}
+      >
+        <Input
+          label="Full Name"
+          placeholder="Segun Favour"
+          type="text"
+          value={formData.fullName}
+          onChange={(e: any) => {
+            setFormData({
+              ...formData,
+              fullName: e.target.value,
+            });
+          }}
+        />
+        <Input
+          label="Email"
+          placeholder="Segun@yahoo.com"
+          type="email"
+          value={formData.email}
+          onChange={(e: any) => {
+            setFormData({
+              ...formData,
+              email: e.target.value,
+            });
+          }}
+        />
+
+        <Input
+          label="Password"
+          placeholder="*****"
+          type="password"
+          value={formData.password}
+          onChange={(e: any) => {
+            setFormData({
+              ...formData,
+              password: e.target.value,
+            });
+          }}
+        />
 
         <button
           type="submit"

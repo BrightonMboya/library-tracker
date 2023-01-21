@@ -1,8 +1,20 @@
 import Input from "../components/UI/Input";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
+import { useState } from "react";
+import type { NextPage } from "next";
+import type { ChangeEvent } from "react";
+import { inferProcedureInput } from "@trpc/server";
+import { AppRouter } from "../server/api/root";
+import { signIn } from "next-auth/react";
 
-const Login = () => {
+const Login: NextPage = () => {
+  const initialFormStates = {
+    email: "",
+    password: "",
+  };
+
+  const [formData, setFormData] = useState(initialFormStates);
   return (
     <div className="mt-5 flex min-h-screen flex-col items-center justify-center">
       <div>
@@ -16,23 +28,42 @@ const Login = () => {
           Continue with Google
         </button>
       </div>
-      <form className="mt-5 space-y-5">
+      <form
+        className="mt-5 space-y-5"
+        onSubmit={async (e) => {
+          e.preventDefault();
+          const loginData = {
+            email: formData.email,
+            password: formData.password,
+          };
+          await signIn("credentials", {
+            ...loginData,
+            callbackUrl: "/admin/libRegistration",
+          });
+        }}
+      >
         <Input
           type="email"
           label="Email"
           placeholder="Segun@yahoo.com"
-          value=""
-          onChange={() => {
-            console.log("change this fn");
+          value={formData.email}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setFormData({
+              ...formData,
+              email: e.target.value,
+            });
           }}
         />
         <Input
-          type="email"
+          type="password"
           label="Password"
           placeholder="*********"
-          value=""
-          onChange={() => {
-            console.log("change this fn");
+          value={formData.password}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setFormData({
+              ...formData,
+              password: e.target.value,
+            });
           }}
         />
 

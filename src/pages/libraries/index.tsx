@@ -2,7 +2,10 @@ import { api } from "../../utils/api";
 import { Footer, LibraryCard } from "../../components/LandingPage";
 
 const Libraries = () => {
-  const allLibraries = api.libRegistration.all.useQuery();
+  // const allLibraries = api.libRegistration.all.useQuery();
+  // console.log(allLibraries);
+  const allLibraries = api.library.all.useQuery();
+  console.log(allLibraries);
 
   return (
     <div>

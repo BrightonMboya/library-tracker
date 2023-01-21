@@ -1,6 +1,5 @@
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { z } from 'zod';
-import { prisma } from "../../db"
 import { hash } from "argon2";
 import { TRPCError } from "@trpc/server";
 

@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { api } from "../utils/api";
 import type { inferProcedureInput } from "@trpc/server";
 import type { AppRouter } from "../server/api/root";
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 
 const Signup: NextPage = () => {
   const router = useRouter();
@@ -61,7 +61,7 @@ const Signup: NextPage = () => {
           placeholder="Segun Favour"
           type="text"
           value={formData.fullName}
-          onChange={(e: any) => {
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
             setFormData({
               ...formData,
               fullName: e.target.value,
@@ -73,7 +73,7 @@ const Signup: NextPage = () => {
           placeholder="Segun@yahoo.com"
           type="email"
           value={formData.email}
-          onChange={(e: any) => {
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
             setFormData({
               ...formData,
               email: e.target.value,
@@ -86,7 +86,7 @@ const Signup: NextPage = () => {
           placeholder="*****"
           type="password"
           value={formData.password}
-          onChange={(e: any) => {
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
             setFormData({
               ...formData,
               password: e.target.value,

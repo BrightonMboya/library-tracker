@@ -6,8 +6,6 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { env } from "../../../env/server.mjs";
 import { prisma } from "../../../server/db";
 import Credentials from "next-auth/providers/credentials";
-// import { verify } from "argon2";
-// import argon2 from "argon2"
 import { loginSchema } from "../../../server/api/routers/user";
 
 export const authOptions: NextAuthOptions = {

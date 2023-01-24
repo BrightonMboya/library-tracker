@@ -1,15 +1,19 @@
-import React from "react";
 import Image from "next/legacy/image";
 
 const Contribute = () => {
   return (
-    <div className="flex flex-col items-center">
-      <div className="relative h-[300px] w-[300px]">
+    <div className="relative  flex flex-col items-center pt-10">
+      <div className="absolute -top-1 h-[500px] w-full bg-[#7C7C7C] py-1 ">
+        <h3 className="pl-5 text-xl text-white  ">
+          Contribute to Library Tracker
+        </h3>
+      </div>
+      <div className="relative h-[300px] w-[350px]">
         <Image
           src="/hands.png"
           alt="logo"
           layout="fill"
-          className="grayscale"
+          className="object-cover grayscale"
         />
 
         <div className="absolute pl-5 pt-3 text-white">
@@ -24,7 +28,7 @@ const Contribute = () => {
           </button>
         </div>
       </div>
-      <div className="relative mt-5 h-[332px] w-[335px]">
+      <div className="relative mt-5 h-[332px] w-[350px]">
         <Image src="/map.png" alt="logo" layout="fill" />
         <div className="absolute bottom-0 h-[120px] w-full bg-gradient-to-t from-slate-600 to-transparent">
           <h3 className="absolute top-8  left-3 text-xl font-medium text-white">

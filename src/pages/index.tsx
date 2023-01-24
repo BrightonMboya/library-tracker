@@ -1,5 +1,10 @@
 import { type NextPage } from "next";
-import { Footer, HeroSection, Contribute } from "../components/LandingPage";
+import {
+  Footer,
+  HeroSection,
+  Contribute,
+  LibraryNearYou,
+} from "../components/LandingPage";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "../utils/api";
@@ -8,6 +13,7 @@ const Home: NextPage = () => {
   return (
     <>
       <HeroSection />
+      <LibraryNearYou />
       <Contribute />
       <Footer />
     </>

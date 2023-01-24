@@ -1,20 +1,13 @@
 import { api } from "../../utils/api";
-import { Footer, LibraryCard } from "../../components/LandingPage";
+import LibraryCard from "./LibraryCard";
 
-const Libraries = () => {
-  const allLibraries = api.libRegistration.all.useQuery();
-
+const LibraryNearYou = () => {
+  const libQuery = api.library.all.useQuery();
   return (
     <div>
-      <div className="mt-5 mb-[3rem] flex flex-col items-center gap-5">
-        {allLibraries.isLoading && <p>Fetching The libraries</p>}
-        {allLibraries.isError && (
-          <p>
-            Encountered the error while fetching, check your network and try
-            again
-          </p>
-        )}
-        {allLibraries.data?.map((library) => (
+      <h3 className="pl-5 text-xl ">Libraries Near You</h3>
+      <div className="mt-5 mb-[2rem] flex flex-col items-center gap-[2rem]">
+        {libQuery.data?.slice(0, 4).map((library) => (
           <LibraryCard
             key={library.id}
             name={library.name}
@@ -28,10 +21,8 @@ const Libraries = () => {
           />
         ))}
       </div>
-
-      <Footer />
     </div>
   );
 };
 
-export default Libraries;
+export default LibraryNearYou;

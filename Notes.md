@@ -12,3 +12,4 @@
 5. Fetching a specific library
 6. Dynamic routes for the library
 7. Added the sign In Feature
+8. Added the details of a specific library

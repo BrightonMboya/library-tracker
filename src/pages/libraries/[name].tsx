@@ -7,6 +7,7 @@ import {
   GalleryTab,
   ServicesTab,
 } from "../../components/admin/LibInfo";
+import { Footer } from "../../components/LandingPage";
 
 const Index = () => {
   const [showBasicInfo, setShowBasicInfo] = useState(true);
@@ -30,14 +31,15 @@ const Index = () => {
   // console.log(librariesQuery.error, "this is the fuckin error")
 
   return (
-    <div>
-      {librariesQuery.isError && <p>The data is Invalid</p>}
-
-      <div>
-        <h3>{librariesQuery.data?.name}</h3>
+    <div className="mt-3 ">
+      <div className="mb-[2rem] pl-5">
+        <h3 className="text-xl font-medium">{librariesQuery.data?.name}</h3>
         <h3>{librariesQuery.data?.adress}</h3>
+        <p className="w-[150px] rounded-md bg-grey py-2 pl-2 text-lg font-medium text-blue">
+          {librariesQuery.data?.libraryType}
+        </p>
 
-        <div className="flex items-center gap-5">
+        <div className="mt-5 flex items-center gap-5">
           <button
             onClick={() => {
               setShowBasicInfo(true);
@@ -124,7 +126,13 @@ const Index = () => {
             SRHRInfoServices={librariesQuery.data?.SRHRInfoServices!}
           />
         )}
-        {showEvents && <EventsTab />}
+        {showEvents && (
+          <EventsTab
+            eventsTitle={librariesQuery.data?.eventsTitle!}
+            eventExtract={librariesQuery.data?.eventExtract!}
+            monthOfTheEvent={librariesQuery.data?.monthOfTheEvent!}
+          />
+        )}
         {showGallery && <GalleryTab />}
         {showServices && (
           <ServicesTab
@@ -137,6 +145,7 @@ const Index = () => {
           />
         )}
       </div>
+      <Footer />
     </div>
   );
 };

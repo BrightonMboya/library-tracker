@@ -16,6 +16,7 @@ const Index = () => {
   const id = useRouter().query.name as string;
 
   const librariesQuery = api.libRegistration.byId.useQuery({ id });
+  console.log(librariesQuery.data);
 
   const PropsData = {
     id: librariesQuery.data?.id,
@@ -25,6 +26,7 @@ const Index = () => {
 
   const activeTab = "border-b-2  border-b-blue pb-1 cursor-pointer text-lg";
   const inActiveTab = "cursor-pointer text-lg pb-1 ";
+
   // console.log(librariesQuery.error, "this is the fuckin error")
 
   return (
@@ -89,15 +91,10 @@ const Index = () => {
           <BasicInfoTab
             name={librariesQuery.data?.name!}
             id={librariesQuery.data?.id!}
-            libraryType={librariesQuery.data?.libraryType!}
             yearOfEstablishment={librariesQuery.data?.yearOfEstablishment!}
             email={librariesQuery.data?.email!}
             phoneNumber={librariesQuery.data?.phoneNumber!}
             website={librariesQuery.data?.website!}
-            latitude={librariesQuery.data?.latitude!}
-            longitude={librariesQuery.data?.longitude!}
-            country={librariesQuery.data?.country!}
-            State={librariesQuery.data?.State!}
             adress={librariesQuery.data?.adress!}
             extract={librariesQuery.data?.extract!}
             openingTime={librariesQuery.data?.openingTime!}
@@ -125,20 +122,20 @@ const Index = () => {
               librariesQuery.data?.disablePersonUseLibrary!
             }
             SRHRInfoServices={librariesQuery.data?.SRHRInfoServices!}
+          />
+        )}
+        {showEvents && <EventsTab />}
+        {showGallery && <GalleryTab />}
+        {showServices && (
+          <ServicesTab
             registrationCostPerMonth={
               librariesQuery.data?.registrationCostPerMonth!
             }
             registrationCostPerYear={
               librariesQuery.data?.registrationCostPerYear!
             }
-            eventsTitle={librariesQuery.data?.eventsTitle!}
-            eventExtract={librariesQuery.data?.eventExtract!}
-            monthOfTheEvent={librariesQuery.data?.monthOfTheEvent!}
           />
         )}
-        {showEvents && <EventsTab />}
-        {showGallery && <GalleryTab />}
-        {showServices && <ServicesTab />}
       </div>
     </div>
   );

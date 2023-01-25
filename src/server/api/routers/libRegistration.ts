@@ -2,10 +2,42 @@ import { createTRPCRouter, publicProcedure } from "../trpc";
 import { Prisma } from "@prisma/client";
 import { z } from 'zod';
 import { prisma } from "../../db"
+import { TRPCError } from "@trpc/server";
 
 const libraryInfoSelect = Prisma.validator<Prisma.LibraryInfoSelect>()({
     id: true,
     name: true,
+    libraryType: true,
+    yearOfEstablishment: true,
+    email: true,
+    phoneNumber: true,
+    website: true,
+    latitude: true,
+    longitude: true,
+    country: true,
+    State: true,
+    adress: true,
+    extract: true,
+    openingTime: true,
+    closingTime: true,
+    numberOfProffesionalStaff: true,
+    numberOfUnproffessionalStaff: true,
+    numberOfUsers: true,
+    numberOfComputerSets: true,
+    numberOfELibrariesPlartform: true,
+    readingSpaceCapacity: true,
+    numberOfReadingTablets: true,
+    numberOfBooks: true,
+    numberOfJournals: true,
+    internetFacilities: true,
+    printAndCopyAccess: true,
+    disablePersonUseLibrary: true,
+    SRHRInfoServices: true,
+    registrationCostPerMonth: true,
+    registrationCostPerYear: true,
+    eventsTitle: true,
+    eventExtract: true,
+    monthOfTheEvent: true,
 })
 
 export const libTypes = {
@@ -80,8 +112,15 @@ export const libraryRegistrationRouter = createTRPCRouter({
         .query(async ({ input }) => {
             const { id } = input;
             const library = await prisma.libraryInfo.findUnique({
-                where: { id }
+                where: { id },
+                select: libraryInfoSelect,
             });
+            if (!library) {
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "No such library with this id",
+                });
+            }
             return library
         })
 })

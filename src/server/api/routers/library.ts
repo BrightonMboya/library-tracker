@@ -1,7 +1,9 @@
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { Prisma } from "@prisma/client";
 import { z } from 'zod';
-import { prisma } from "../../db"
+import { prisma } from "../../db";
+import { libraryInfoSelect } from "./libRegistration";
+import { TRPCError } from "@trpc/server";
 
 
 export const library = createTRPCRouter({
@@ -36,7 +38,27 @@ export const library = createTRPCRouter({
                     nextCursor
                 }
             }
+        ),
+    byId: publicProcedure
+        .input(
+            z.object({
+                id: z.string(),
+            }),
         )
+        .query(async ({ input }) => {
+            const { id } = input;
+            const library = await prisma.libraryInfo.findUnique({
+                where: { id },
+                select: libraryInfoSelect,
+            });
+            if (!library) {
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "No such library with this id",
+                });
+            }
+            return library
+        })
 
 })
 

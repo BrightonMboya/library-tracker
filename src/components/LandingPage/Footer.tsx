@@ -7,7 +7,7 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 const Footer = () => {
   const date = new Date().getFullYear();
   return (
-    <div className="bg-[#F3F3F3]  pt-5">
+    <div className=" bg-[#F3F3F3] pt-5">
       <div className="flex items-center justify-center pl-0">
         <div className="relative flex h-[40px] w-[147px] items-center justify-center">
           <Image src="/logo.png" alt="logo" layout="fill" />

@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { prisma } from "../../db"
 import { TRPCError } from "@trpc/server";
 
-const libraryInfoSelect = Prisma.validator<Prisma.LibraryInfoSelect>()({
+export const libraryInfoSelect = Prisma.validator<Prisma.LibraryInfoSelect>()({
     id: true,
     name: true,
     libraryType: true,

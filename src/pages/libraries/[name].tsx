@@ -16,7 +16,7 @@ const Index = () => {
   const [showGallery, setShowGallery] = useState(false);
   const id = useRouter().query.name as string;
 
-  const librariesQuery = api.libRegistration.byId.useQuery({ id });
+  const librariesQuery = api.library.byId.useQuery({ id });
   console.log(librariesQuery.data);
 
   const PropsData = {
@@ -29,6 +29,10 @@ const Index = () => {
   const inActiveTab = "cursor-pointer text-lg pb-1 ";
 
   // console.log(librariesQuery.error, "this is the fuckin error")
+
+  if (librariesQuery.error) {
+    return <div>There's an error while fetching the data</div>;
+  }
 
   return (
     <div className="mt-3 ">

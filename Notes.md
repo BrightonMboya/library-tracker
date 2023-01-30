@@ -7,7 +7,7 @@
 
 1. Adding a new library
 2. Fetching libraries
-3. User Signing Up
+3. User Signing Up --> currently there's some fuckin bugs, I commented the trpc procedure doing this
 4. Fetching all the users
 5. Fetching a specific library
 6. Dynamic routes for the library

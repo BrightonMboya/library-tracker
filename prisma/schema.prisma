@@ -71,8 +71,8 @@ model VerificationToken {
 
 // Schemas starts here
 model LibraryInfo {
-    id                           String @id @default(cuid())
-    name                         String @unique
+    id                           String   @id @default(cuid())
+    name                         String   @unique
     libraryType                  String
     yearOfEstablishment          String
     email                        String
@@ -104,6 +104,8 @@ model LibraryInfo {
     eventsTitle                  String
     eventExtract                 String
     monthOfTheEvent              String
+    approved                     Boolean  @default(false)
+    createdAt                    DateTime @default(now())
 }
 
 model AdminInfo {

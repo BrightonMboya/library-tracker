@@ -117,6 +117,7 @@ const Index = () => {
           eventsTitle: formData.eventsTitle,
           eventExtract: formData.eventExtract,
           monthOfTheEvent: formData.monthOfTheEvent,
+          approved: false,
         };
         try {
           await addLibrary.mutateAsync(input);

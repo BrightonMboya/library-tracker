@@ -2,7 +2,7 @@ import { api } from "../../utils/api";
 import LibraryCard from "./LibraryCard";
 
 const LibraryNearYou = () => {
-  const libQuery = api.library.all.useQuery();
+  const libQuery = api.libRegistration.all.useQuery();
   return (
     <div>
       <h3 className="pl-5 text-xl ">Libraries Near You</h3>

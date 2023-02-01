@@ -38,6 +38,7 @@ export const libraryInfoSelect = Prisma.validator<Prisma.LibraryInfoSelect>()({
     eventsTitle: true,
     eventExtract: true,
     monthOfTheEvent: true,
+    approved: true,
 })
 
 export const libTypes = {
@@ -74,6 +75,7 @@ export const libTypes = {
     eventsTitle: z.string(),
     eventExtract: z.string(),
     monthOfTheEvent: z.string(),
+    approved: z.boolean(),
 
 
 };
@@ -88,10 +90,7 @@ export const libraryRegistrationRouter = createTRPCRouter({
                 data: input,
                 select: libraryInfoSelect,
             })
-            // const library = await prisma.libraryInfo.create({
-            //     data: input,
-            //     // select: defaultLibrarySelect,
-            // });
+
             return library
         }),
 
@@ -122,6 +121,26 @@ export const libraryRegistrationRouter = createTRPCRouter({
                 });
             }
             return library
+        }),
+    approve: publicProcedure
+        .input(
+            z.object({
+                id: z.string(),
+                approve: z.boolean(),
+            })
+        )
+        .mutation(async ({ input }) => {
+            const { id, approve } = input;
+            const approveLibrary = await prisma.libraryInfo.update({
+                where: {
+                    id: id,
+                },
+                data: {
+                    approved: approve
+                }
+            })
+
+            return approveLibrary;
         })
 })
 

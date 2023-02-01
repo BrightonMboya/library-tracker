@@ -8,6 +8,8 @@ import {
   ServicesTab,
 } from "../../components/admin/LibInfo";
 import { Footer } from "../../components/LandingPage";
+import type { inferProcedureInput } from "@trpc/server";
+import { appRouter, AppRouter } from "../../server/api/root";
 
 const Index = () => {
   const [showBasicInfo, setShowBasicInfo] = useState(true);
@@ -16,7 +18,10 @@ const Index = () => {
   const [showGallery, setShowGallery] = useState(false);
   const id = useRouter().query.name as string;
 
-  const librariesQuery = api.library.byId.useQuery({ id });
+  const [approveLib, setApproveLib] = useState(false);
+
+  const librariesQuery = api.library.byId.useQuery({ id }); // query to fetch the libraries
+  const approveLibQuery = api.libRegistration.approve.useMutation();
   console.log(librariesQuery.data);
 
   const PropsData = {
@@ -39,9 +44,29 @@ const Index = () => {
       <div className="mb-[2rem] pl-5">
         <h3 className="text-xl font-medium">{librariesQuery.data?.name}</h3>
         <h3>{librariesQuery.data?.adress}</h3>
-        <p className="w-[150px] rounded-md bg-grey py-2 pl-2 text-lg font-medium text-blue">
+        <p className="mt-3 w-[150px] rounded-md bg-grey py-2 text-center text-lg font-medium text-blue">
           {librariesQuery.data?.libraryType}
         </p>
+        {/* show the aprove buttons if the library is not approved and the session role is superadmin */}
+        {librariesQuery.data?.approved ? (
+          <p>This library is approved</p>
+        ) : (
+          <div className="mt-5 flex items-center gap-5">
+            <button className="cursor-pointer rounded-md  bg-[#E4E4E4] px-4 py-2">
+              Decline
+            </button>
+            <button
+              className="cursor-pointer rounded-md  bg-blue px-4 py-2 tracking-wide text-white"
+              onClick={async () => {
+                const Input = inferProcedureInput<
+                  appRouter["libRegistration"]["approve"]
+                >;
+              }}
+            >
+              Approve
+            </button>
+          </div>
+        )}
 
         <div className="mt-5 flex items-center gap-5">
           <button

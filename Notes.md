@@ -13,3 +13,4 @@
 6. Dynamic routes for the library
 7. Added the sign In Feature
 8. Added the details of a specific library
+9. Added the library approval functionality

@@ -1,5 +1,5 @@
 import { createTRPCRouter } from "./trpc";
-import { adminRouter, libraryRegistrationRouter, library } from "./routers";
+import { adminRouter, libraryRegistrationRouter, library, userRouter } from "./routers";
 
 /**
  * This is the primary router for your server.
@@ -9,7 +9,7 @@ import { adminRouter, libraryRegistrationRouter, library } from "./routers";
 export const appRouter = createTRPCRouter({
   libRegistration: libraryRegistrationRouter,
   adminRouter: adminRouter,
-  // user: User,
+  user: userRouter,
   library: library
 });
 

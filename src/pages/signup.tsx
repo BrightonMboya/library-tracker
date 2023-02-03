@@ -11,8 +11,9 @@ import { useState, ChangeEvent } from "react";
 const Signup: NextPage = () => {
   const router = useRouter();
 
-  const createUser = api.user.create.useMutation();
-  const allUsers = api.user.all.useQuery();
+  // const createUser = api.user.create.useMutation();
+  const userRouter = api.user.signup.useMutation();
+  // const allUsers = api.user.all.useQuery();
   // console.log("No Users?", allUsers.data);
 
   const formStates = {
@@ -40,7 +41,7 @@ const Signup: NextPage = () => {
         className="mt-5 space-y-5"
         onSubmit={async (e) => {
           e.preventDefault();
-          type Input = inferProcedureInput<AppRouter["user"]["create"]>;
+          type Input = inferProcedureInput<AppRouter["user"]["signup"]>;
           const input: Input = {
             fullName: formData.fullName,
             email: formData.email,
@@ -48,9 +49,9 @@ const Signup: NextPage = () => {
           };
 
           try {
-            await createUser.mutateAsync(input);
+            await userRouter.mutateAsync(input);
             setFormData(formStates);
-            router.push("/libraries");
+            router.push("/login");
           } catch (cause) {
             console.error({ cause }, "Failed to create the user!!");
           }

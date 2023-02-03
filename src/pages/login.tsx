@@ -1,7 +1,9 @@
+// "use-client";
+
 import Input from "../components/UI/Input";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import type { NextPage } from "next";
 import type { ChangeEvent } from "react";
 import { inferProcedureInput } from "@trpc/server";
@@ -15,6 +17,7 @@ const Login: NextPage = () => {
   };
 
   const [formData, setFormData] = useState(initialFormStates);
+
   return (
     <div className="mt-5 flex min-h-screen flex-col items-center justify-center">
       <div>
@@ -36,10 +39,15 @@ const Login: NextPage = () => {
             email: formData.email,
             password: formData.password,
           };
-          await signIn("credentials", {
-            ...loginData,
-            callbackUrl: "/admin/libRegistration",
-          });
+
+          try {
+            await signIn("credentials", {
+              ...loginData,
+              callbackUrl: "/libraries",
+            });
+          } catch (cause) {
+            console.log(cause, "caused the error");
+          }
         }}
       >
         <Input

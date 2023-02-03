@@ -9,7 +9,7 @@ import {
 } from "../../components/admin/LibInfo";
 import { Footer } from "../../components/LandingPage";
 import type { inferProcedureInput } from "@trpc/server";
-import { appRouter, AppRouter } from "../../server/api/root";
+import type { AppRouter } from "../../server/api/root";
 
 const Index = () => {
   const [showBasicInfo, setShowBasicInfo] = useState(true);
@@ -18,10 +18,9 @@ const Index = () => {
   const [showGallery, setShowGallery] = useState(false);
   const id = useRouter().query.name as string;
 
-  const [approveLib, setApproveLib] = useState(false);
-
   const librariesQuery = api.library.byId.useQuery({ id }); // query to fetch the libraries
   const approveLibQuery = api.libRegistration.approve.useMutation();
+  const utils = api.useContext(); // for invalidating the query after lib approval
   console.log(librariesQuery.data);
 
   const PropsData = {
@@ -33,7 +32,16 @@ const Index = () => {
   const activeTab = "border-b-2  border-b-blue pb-1 cursor-pointer text-lg";
   const inActiveTab = "cursor-pointer text-lg pb-1 ";
 
-  // console.log(librariesQuery.error, "this is the fuckin error")
+  const onApproval = async (isApproved: boolean) => {
+    type Input = inferProcedureInput<AppRouter["libRegistration"]["approve"]>;
+    const input: Input = { approve: isApproved, id: id };
+    try {
+      await approveLibQuery.mutateAsync(input);
+      utils.libRegistration.invalidate();
+    } catch (cause) {
+      console.error({ cause }, "Failed to approve the library");
+    }
+  };
 
   if (librariesQuery.error) {
     return <div>There's an error while fetching the data</div>;
@@ -49,19 +57,20 @@ const Index = () => {
         </p>
         {/* show the aprove buttons if the library is not approved and the session role is superadmin */}
         {librariesQuery.data?.approved ? (
-          <p>This library is approved</p>
+          <p className="mt-3 text-lg tracking-wide text-blue">
+            This library is approved
+          </p>
         ) : (
           <div className="mt-5 flex items-center gap-5">
-            <button className="cursor-pointer rounded-md  bg-[#E4E4E4] px-4 py-2">
+            <button
+              className="cursor-pointer rounded-md  bg-[#E4E4E4] px-4 py-2"
+              onClick={() => onApproval(false)}
+            >
               Decline
             </button>
             <button
               className="cursor-pointer rounded-md  bg-blue px-4 py-2 tracking-wide text-white"
-              onClick={async () => {
-                const Input = inferProcedureInput<
-                  appRouter["libRegistration"]["approve"]
-                >;
-              }}
+              onClick={() => onApproval(true)}
             >
               Approve
             </button>

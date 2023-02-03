@@ -2,58 +2,39 @@ import { createTRPCRouter, publicProcedure } from "../trpc";
 import { z } from 'zod';
 import { hash } from "argon2";
 import { TRPCError } from "@trpc/server";
+import { signUpSchema } from "../../../components/auth/authSchema";
 
 
-// export const loginSchema = z.object({
-//     email: z.string().email(),
-//     password: z.string().min(4).max(12)
-// })
 
-// export const signUpSchema = loginSchema.extend({
-//     fullName: z.string()
-// })
+export const userRouter = createTRPCRouter({
+    signup: publicProcedure
+        .input(signUpSchema)
+        .mutation(async ({ input, ctx }) => {
+            const { fullName, email, password } = input;
 
-// export type ILogin = z.infer<typeof loginSchema>;
-// export type ISignUp = z.infer<typeof signUpSchema>;
+            const exists = await ctx.prisma.user.findFirst({
+                where: { email },
+            });
 
+            if (exists) {
+                throw new TRPCError({
+                    code: "CONFLICT",
+                    message: "User already exists",
+                });
+            }
 
-// export const userRouter = createTRPCRouter({
-//     all: publicProcedure.query(({ ctx }) => {
-//         return ctx.prisma.user.findMany();
-//     }),
+            const hashedPassword = await hash(password);
 
-//     create: publicProcedure
-//         .input(signUpSchema)
-//         .mutation(async ({ input, ctx }) => {
-//             const { fullName, email, password } = input;
+            const result = await ctx.prisma.user.create({
+                data: { fullName, email, password: hashedPassword },
+            });
 
-//             // checking if the email exists
-//             const exists = await ctx.prisma.user.findFirst({
-//                 where: { email }
-//             });
+            return {
+                status: 201,
+                message: "Account created succesfully",
+                result: result.email
+            }
+        })
+});
 
-//             if (exists) {
-//                 throw new TRPCError({
-//                     code: "CONFLICT",
-//                     message: "User already Exists"
-//                 })
-//             }
-
-//             // then hash the fuckin password
-//             const hashedPassword = await hash(password);
-
-//             const result = await ctx.prisma.user.create({
-//                 data: { fullName, email, password: hashedPassword }
-//             });
-
-//             return {
-//                 status: 201,
-//                 message: "Account Created Successfully",
-//                 result: result.email,
-//             }
-//         })
-
-// })
-
-
-// export default userRouter;
+export default userRouter;

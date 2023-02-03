@@ -67,8 +67,14 @@ const Index = () => {
                 </h3>
                 <p className="font-medium text-[#999999]">created 5 days ago</p>
                 <div className="flex items-center gap-5">
-                  <button className="bg-[#FEEBC8] px-2 py-1 text-[#652B19]">
-                    Pending
+                  <button
+                    className={
+                      library.approved
+                        ? "bg-[#C6F6D5] px-2 py-1 font-medium text-[#1C4532]"
+                        : "bg-[#FEEBC8] px-2 py-1 font-medium text-[#652B19]"
+                    }
+                  >
+                    {library.approved ? "Approved" : "Pending"}
                   </button>
 
                   <Link href={`/libraries/${library.id}`}>

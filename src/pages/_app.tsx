@@ -1,15 +1,15 @@
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import { Inter } from "@next/font/google";
+import { Montserrat } from "@next/font/google";
 
 import { api } from "../utils/api";
 
 import "../styles/globals.css";
 
-const inter = Inter({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-montserrat",
 });
 
 const MyApp: AppType<{ session: Session | null }> = ({
@@ -18,7 +18,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <main className={`${inter.variable} font-sans`}>
+      <main className={`${montserrat.variable}  font-montserrat`}>
         <Component {...pageProps} />
       </main>
     </SessionProvider>

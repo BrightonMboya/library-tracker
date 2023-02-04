@@ -2,20 +2,35 @@ import React from "react";
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import Link from "next/link";
+import Image from "next/legacy/image";
 
 const HeroSection = () => {
   const [showNav, setShowNav] = React.useState(false);
   return (
     <React.Fragment>
-      <div
-        onClick={() => setShowNav(!showNav)}
-        className="absolute right-5 top-2 cursor-pointer"
-      >
-        {!showNav ? <FaBars size={30} color="" /> : <ImCross size={30} />}
+      <div className="mt-5 flex items-center justify-between">
+        <div className="relative ml-5  h-[40px] w-[140px]">
+          <Image src="/logo.png" layout="fill" alt="logo-img" />
+        </div>
+
+        <div className="flex items-center gap-5">
+          <Link href="/libraries">
+            <p className="mr-5 cursor-pointer font-medium tracking-wide text-gray-700">
+              Library List
+            </p>
+          </Link>
+
+          <div
+            onClick={() => setShowNav(!showNav)}
+            className="absolute right-5 top-2 cursor-pointer md:relative md:top-0 "
+          >
+            {!showNav ? <FaBars size={25} color="" /> : <ImCross size={20} />}
+          </div>
+        </div>
       </div>
 
       {showNav && (
-        <div className="flex h-screen flex-col items-start gap-10  bg-white pl-5 pt-[5rem] text-xl font-medium text-blue">
+        <div className="z-[100] flex h-screen flex-col items-start gap-10  bg-white pl-5 pt-[5rem] text-xl font-medium text-blue md:absolute md:h-[600px]">
           <Link href="/libraries">
             <p className="w-screen border-b-[2px] pb-3">Library List</p>
           </Link>
@@ -41,10 +56,13 @@ const HeroSection = () => {
       )}
 
       <div className="flex min-h-screen flex-col items-center justify-center">
+        <h3 className="text-xl font-medium tracking-wide">
+          Libraries are here .
+        </h3>
         <input
           type="search"
-          placeholder="Search for a library"
-          className="rounded-md border-2 border-slate-400 bg-transparent px-2 py-1 focus:outline-none"
+          placeholder="Find a Library"
+          className="mt-5 rounded-md border-2 border-slate-400 bg-transparent px-2 py-1 focus:outline-none"
         />
       </div>
     </React.Fragment>

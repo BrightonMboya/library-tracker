@@ -134,9 +134,9 @@ const Index = () => {
         <button
           type="button"
           onClick={() => setPage(page + 1)}
-          className="mt-5 w-[250px] cursor-pointer rounded-md bg-blue px-2 py-2 font-medium text-white"
+          className="mt-5 w-[250px] cursor-pointer rounded-md bg-blue px-2 py-2 font-medium text-white md:mt-[2rem] md:py-4 md:text-lg"
         >
-          Next
+          Save & Next
         </button>
       )}
 

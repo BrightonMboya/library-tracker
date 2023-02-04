@@ -14,27 +14,33 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="mt-5 flex flex-col gap-3 pl-5">
-        <h3 className="text-xl font-medium uppercase tracking-wide">Company</h3>
-        <Link href="#">Sign In</Link>
-        <Link href="#">Sign Up</Link>
-        <Link href="#">Library Administrator</Link>
-
-        <h3 className="mt-5 text-xl font-medium uppercase tracking-wide">
-          contact us
-        </h3>
-        <div className="flex items-center gap-2 text-lg">
-          <AiOutlinePhone size={25} />
-          <p>+23478908734</p>
+      <div className="mt-5 flex flex-col gap-3 pl-5 md:mt-[2rem] md:flex-row md:items-start md:justify-around ">
+        <div className="flex flex-col gap-3">
+          <h3 className="text-xl font-medium uppercase tracking-wide">
+            Company
+          </h3>
+          <Link href="#">Sign In</Link>
+          <Link href="#">Sign Up</Link>
+          <Link href="#">Library Administrator</Link>
         </div>
 
-        <div className="flex items-center gap-2 text-lg">
-          <AiOutlineMail size={25} />
-          <p>info@libraryaidafrica.org</p>
+        <div className="flex flex-col gap-3">
+          <h3 className="mt-5 text-xl font-medium uppercase tracking-wide md:mt-0">
+            contact us
+          </h3>
+          <div className="flex items-center gap-2 text-lg">
+            <AiOutlinePhone size={25} />
+            <p>+23478908734</p>
+          </div>
+
+          <div className="flex items-center gap-2 text-lg">
+            <AiOutlineMail size={25} />
+            <p>info@libraryaidafrica.org</p>
+          </div>
         </div>
 
-        <div>
-          <h3 className="mt-5 text-xl font-medium uppercase tracking-wide">
+        <div className="flex flex-col gap-3">
+          <h3 className="mt-5 text-xl font-medium uppercase tracking-wide md:mt-0">
             Follow Us
           </h3>
           <div className="mt-5 flex items-center gap-5">
@@ -44,9 +50,8 @@ const Footer = () => {
             <FaTwitter size={25} />
           </div>
         </div>
-
-        <p className="mt-5 text-lg">Copyright {date}</p>
       </div>
+      <p className="mt-5 text-lg md:text-center">Copyright {date}</p>
     </div>
   );
 };

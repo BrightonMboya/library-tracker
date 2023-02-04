@@ -6,7 +6,7 @@ const LibraryNearYou = () => {
   return (
     <div>
       <h3 className="pl-5 text-xl ">Libraries Near You</h3>
-      <div className="mt-5 mb-[2rem] flex flex-col items-center gap-[2rem]">
+      <div className="mt-5 mb-[2rem] flex flex-col items-center gap-[2rem] md:grid md:grid-cols-2 md:pl-5">
         {libQuery.data?.slice(0, 4).map((library) => (
           <LibraryCard
             key={library.id}

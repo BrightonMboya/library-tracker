@@ -16,11 +16,15 @@ const Home: NextPage = (props) => {
   // console.log(sessionData?.user, "is it?");
   return (
     <>
-      <HeroSection />
+      <main className="">
+        <HeroSection />
+        <section className="container flex flex-col items-center  justify-center md:max-w-[100ch] xl:max-w-none">
+          <LibraryNearYou />
+        </section>
+        <Contribute />
 
-      <LibraryNearYou />
-      <Contribute />
-      <Footer />
+        <Footer />
+      </main>
     </>
   );
 };

@@ -72,7 +72,7 @@ const BasicInfoTab = (props: libraryProps) => {
       </div>
 
       <div>
-        <h3 className="mt-5 text-xl font-medium text-blue">
+        <h3 className="mt-5 text-xl font-medium text-blue md:mt-[2rem]">
           Library staff and User strength
         </h3>
         <div className="mt-3 flex flex-col gap-3 text-[#3C3838]">
@@ -98,7 +98,7 @@ const BasicInfoTab = (props: libraryProps) => {
       </div>
 
       <div>
-        <h3 className="mt-5 text-xl font-medium text-blue">
+        <h3 className="mt-5 text-xl font-medium text-blue md:mt-[2rem]">
           Library Amenities and Resources
         </h3>
         <div className="mt-3 flex flex-col gap-3 text-[#3C3838]">

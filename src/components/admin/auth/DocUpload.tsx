@@ -1,14 +1,15 @@
 import React, { useRef, useState } from "react";
+import type { SetStateAction } from "react";
 
 //@ts-ignore
 const DocUpload = ({ formData, setFormData }) => {
   // refs for the passport img
-  const uploadedImage = useRef<any>(null);
-  const imageUploader = useRef<any>(null);
+  const uploadedImage = useRef<HTMLImageElement>(null);
+  const imageUploader = useRef<HTMLInputElement>(null);
 
   // refs for the identity card img
-  const uploadedId = useRef<any>(null);
-  const idUploader = useRef<any>(null);
+  const uploadedId = useRef<HTMLImageElement>(null);
+  const idUploader = useRef<HTMLInputElement>(null);
 
   const [imageUploaded, setImageUploaded] = useState();
   const [passportUploaded, setPassportUploaded] = useState();
@@ -17,14 +18,14 @@ const DocUpload = ({ formData, setFormData }) => {
     <React.Fragment>
       <div>
         <h3>Upload Passport photograph</h3>
-        <div className="flex h-[150px] w-[300px] cursor-pointer  flex-col items-center justify-center rounded-md border-2 border-dashed border-gray-500">
+        <div className="flex h-[150px] w-[300px] cursor-pointer flex-col  items-center justify-center rounded-md border-2 border-dashed border-gray-500 md:h-[90px]">
           <input
             type="file"
             name="passport"
             accept="image/jpeg image/png image/jpg"
             className="absolute h-[100px] border-2 opacity-0"
             onChange={(e: any) => {
-              setImageUploaded(e.target.files[0]);
+              setImageUploaded(e.target?.files[0]);
               setFormData({
                 ...formData,
                 passportUrl: passportUploaded,
@@ -35,7 +36,7 @@ const DocUpload = ({ formData, setFormData }) => {
           <p className="">Upload Your Passport</p>
         </div>
 
-        <div onClick={() => imageUploader.current.click()}>
+        <div onClick={() => imageUploader.current?.click()}>
           <picture>
             <img
               ref={uploadedImage}
@@ -48,7 +49,7 @@ const DocUpload = ({ formData, setFormData }) => {
 
       <div className="mt-[2rem]">
         <h3>Upload Identity Card</h3>
-        <div className="flex h-[150px] w-[300px] cursor-pointer  flex-col items-center justify-center rounded-md border-2 border-dashed border-gray-500">
+        <div className="flex h-[150px] w-[300px] cursor-pointer flex-col  items-center justify-center rounded-md border-2 border-dashed border-gray-500 md:h-[90px]">
           <input
             type="file"
             accept="images/*"
@@ -65,7 +66,7 @@ const DocUpload = ({ formData, setFormData }) => {
           <p className="">Upload Your Identity Card</p>
         </div>
 
-        {uploadedId && (
+        {imageUploaded && (
           <picture>
             <img
               ref={uploadedId}

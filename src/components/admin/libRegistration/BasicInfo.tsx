@@ -5,7 +5,7 @@ import { ChangeEvent } from "react";
 //@ts-ignore
 export default function BascicInfo({ formData, setFormData }) {
   return (
-    <section className="mt-5 flex flex-col items-center gap-5 md:gap-[2rem]">
+    <section className="mt-5 flex flex-col items-center gap-5 md:gap-[1.5rem]">
       <Header
         title="Basic Info"
         desc=" Fill the form below based on the Basic data gotten from the library."

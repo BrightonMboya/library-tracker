@@ -10,42 +10,45 @@ export default function StaffInfo({ formData, setFormData }) {
         title="Staff Info"
         desc="Fill the form below based on the staff and user strength data gotten from the library."
       />
-      <Input
-        label="Number Of Proffesional Staff"
-        placeholder="45"
-        type="text"
-        value={formData.numberOfProffesionalStaff}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setFormData({
-            ...formData,
-            numberOfProffesionalStaff: e.target.value,
-          });
-        }}
-      />
-      <Input
-        label="Number Of Unproffesional Staff"
-        placeholder="5"
-        type="text"
-        value={formData.numberOfUnproffessionalStaff}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setFormData({
-            ...formData,
-            numberOfUnproffessionalStaff: e.target.value,
-          });
-        }}
-      />
-      <Input
-        label="Number Of Unproffesional Staff"
-        placeholder="5"
-        type="text"
-        value={formData.numberOfUsers}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setFormData({
-            ...formData,
-            numberOfUsers: e.target.value,
-          });
-        }}
-      />
+
+      <div className="md:mt-[2rem] md:grid md:grid-cols-2 md:gap-x-5 md:gap-y-[1.5rem]">
+        <Input
+          label="Number Of Proffesional Staff"
+          placeholder="45"
+          type="text"
+          value={formData.numberOfProffesionalStaff}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setFormData({
+              ...formData,
+              numberOfProffesionalStaff: e.target.value,
+            });
+          }}
+        />
+        <Input
+          label="Number Of Unproffesional Staff"
+          placeholder="5"
+          type="text"
+          value={formData.numberOfUnproffessionalStaff}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setFormData({
+              ...formData,
+              numberOfUnproffessionalStaff: e.target.value,
+            });
+          }}
+        />
+        <Input
+          label="Number Of Unproffesional Staff"
+          placeholder="5"
+          type="text"
+          value={formData.numberOfUsers}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setFormData({
+              ...formData,
+              numberOfUsers: e.target.value,
+            });
+          }}
+        />
+      </div>
     </section>
   );
 }

@@ -10,80 +10,88 @@ export default function Services({ formData, setFormData }) {
         title="Events"
         desc="Record event based on the yearly calender of the Library "
       />
-      <Input
-        label="Do they Have Internet Facilities?"
-        placeholder="Yes"
-        type="Text"
-        value={formData.internetFacilities}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setFormData({
-            ...formData,
-            internetFacilities: e.target.value,
-          });
-        }}
-      />
-      <Input
-        label="Print and Copy Access?"
-        placeholder="Yes"
-        type="text"
-        value={formData.printAndCopyAccess}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setFormData({
-            ...formData,
-            printAndCopyAccess: e.target.value,
-          });
-        }}
-      />
-      <Input
-        label="Can Disable person use library?"
-        placeholder="Yes"
-        type="text"
-        value={formData.disablePersonUseLibrary}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setFormData({
-            ...formData,
-            disablePersonUseLibrary: e.target.value,
-          });
-        }}
-      />
 
-      <Input
-        label="SRHR Information Services"
-        placeholder="Yes"
-        type="text"
-        value={formData.SRHRInfoServices}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setFormData({
-            ...formData,
-            SRHRInfoServices: e.target.value,
-          });
-        }}
-      />
+      <div className="md:mt-[2rem] md:flex md:gap-5">
+        <Input
+          label="Do they Have Internet Facilities?"
+          placeholder="Yes"
+          type="Text"
+          value={formData.internetFacilities}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setFormData({
+              ...formData,
+              internetFacilities: e.target.value,
+            });
+          }}
+        />
+        <Input
+          label="Print and Copy Access?"
+          placeholder="Yes"
+          type="text"
+          value={formData.printAndCopyAccess}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setFormData({
+              ...formData,
+              printAndCopyAccess: e.target.value,
+            });
+          }}
+        />
+      </div>
 
-      <Input
-        label="Registration Cost per Month"
-        placeholder="N200,000"
-        type="text"
-        value={formData.registrationCostPerMonth}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setFormData({
-            ...formData,
-            registrationCostPerMonth: e.target.value,
-          });
-        }}
-      />
-      <Input
-        label="Registration Cost per Year"
-        placeholder="Yes"
-        type="text"
-        value={formData.registrationCostPerYear}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setFormData({
-            ...formData,
-            registrationCostPerYear: e.target.value,
-          });
-        }}
-      />
+      <div className="md:flex md:gap-5">
+        <Input
+          label="Can Disable person use library?"
+          placeholder="Yes"
+          type="text"
+          value={formData.disablePersonUseLibrary}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setFormData({
+              ...formData,
+              disablePersonUseLibrary: e.target.value,
+            });
+          }}
+        />
+
+        <Input
+          label="SRHR Information Services"
+          placeholder="Yes"
+          type="text"
+          value={formData.SRHRInfoServices}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setFormData({
+              ...formData,
+              SRHRInfoServices: e.target.value,
+            });
+          }}
+        />
+      </div>
+
+      <div className="md:flex md:gap-5">
+        <Input
+          label="Registration Cost per Month"
+          placeholder="N200,000"
+          type="text"
+          value={formData.registrationCostPerMonth}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setFormData({
+              ...formData,
+              registrationCostPerMonth: e.target.value,
+            });
+          }}
+        />
+        <Input
+          label="Registration Cost per Year"
+          placeholder="Yes"
+          type="text"
+          value={formData.registrationCostPerYear}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setFormData({
+              ...formData,
+              registrationCostPerYear: e.target.value,
+            });
+          }}
+        />
+      </div>
     </section>
   );
 }

@@ -130,36 +130,37 @@ const Index = () => {
     >
       {MultiPageForm()}
 
-      {page < 4 && (
-        <button
-          type="button"
-          onClick={() => setPage(page + 1)}
-          className="mt-5 w-[250px] cursor-pointer rounded-md bg-blue px-2 py-2 font-medium text-white md:mt-[2rem] md:py-4 md:text-lg"
-        >
-          Save & Next
-        </button>
-      )}
+      <div className="flex flex-col md:mt-[2rem] md:flex-row md:space-x-5">
+        {page < 4 && (
+          <button
+            type="button"
+            onClick={() => setPage(page + 1)}
+            className="mt-5 w-[250px] cursor-pointer rounded-md bg-blue px-2 py-2 font-medium text-white md:mt-0 md:mt-[2rem] md:py-3 md:text-lg"
+          >
+            Save & Next
+          </button>
+        )}
 
-      {page > 0 && (
-        <button
-          type="button"
-          onClick={() => setPage(page - 1)}
-          className="mt-5 w-[250px] cursor-pointer rounded-md bg-blue px-2 py-2 font-medium text-white"
-        >
-          Back
-        </button>
-      )}
-
-      {page === 4 && (
-        <button
-          // onClick={handleSubmit}
-          disabled={addLibrary.isLoading}
-          type="submit"
-          className="mt-5 w-[250px] cursor-pointer rounded-md bg-pink-500 px-2 py-2 font-medium text-white"
-        >
-          Submit
-        </button>
-      )}
+        {page > 0 && (
+          <button
+            type="button"
+            onClick={() => setPage(page - 1)}
+            className="mt-5 w-[250px] cursor-pointer rounded-md bg-blue px-2 py-2 font-medium text-white md:mt-0 md:py-3 md:text-lg"
+          >
+            Back
+          </button>
+        )}
+        {page === 4 && (
+          <button
+            // onClick={handleSubmit}
+            disabled={addLibrary.isLoading}
+            type="submit"
+            className="mt-5 w-[250px] cursor-pointer rounded-md bg-pink-500 px-2 py-2 font-medium text-white md:mt-0 md:py-3 md:text-lg"
+          >
+            Submit
+          </button>
+        )}
+      </div>
     </form>
   );
 };

@@ -10,6 +10,23 @@ const s3 = new S3({
     signatureVersion: 'v4'
 })
 
+// export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+
+//     const post = s3.createPresignedPost({
+//         Bucket: process.env.BUCKET_NAME,
+//         Fields: {
+//             key: req.query.file,
+//             'Content-Type': req.query.fileType,
+//         },
+//         Expires: 60, //seconds btw
+//         Conditions: [
+//             ['content-length-range', 0, 5048576], // up to 5MB
+//         ],
+//     })
+
+//     res.status(200).json(post)
+// }
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const extension = (req.query.fileType as string).split('/')[1]
     const Key = `${randomUUID()}.${extension}`

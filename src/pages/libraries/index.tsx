@@ -2,14 +2,16 @@
 
 import { api } from "../../utils/api";
 import { Footer, LibraryCard } from "../../components/LandingPage";
-import { useSession, signOut } from "next-auth/react";
+import { useSession, signOut, getSession } from "next-auth/react";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
-const Libraries: NextPage = () => {
+const Libraries: NextPage = (props) => {
   const router = useRouter();
   const allLibraries = api.libRegistration.all.useQuery();
-  const { data: session, status } = useSession();
+  // const { data } = useSession();
+  const session = useSession();
+  console.log(session);
 
   // if (status === "unauthenticated") {
   //   router.push("/login");
@@ -19,9 +21,9 @@ const Libraries: NextPage = () => {
     <>
       <main className="md:mt-5 md:flex md:flex-col md:items-center">
         {/* {data?.user?.name ? <p>{data?.user.name}</p> : <p>No data </p>}
-      <pre>
-        <code>{JSON.stringify(data, null, 2)}</code>
-      </pre> */}
+        <pre>
+          <code>{JSON.stringify(data, null, 2)}</code>
+        </pre> */}
         <div className="mt-5 mb-[3rem] flex flex-col items-center gap-5 md:grid md:grid-cols-2 md:space-x-4 md:space-y-5 md:pl-5 xl:grid-cols-3">
           {allLibraries.isLoading && <p>Fetching The libraries</p>}
           {allLibraries.isError && (

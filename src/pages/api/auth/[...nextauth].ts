@@ -24,6 +24,7 @@ export const signUpSchema = loginSchema.extend({
 
 export const nextAuthOptions: NextAuthOptions = {
     debug: true,
+    secret: process.env.JWT_SECRET,
     providers: [
         Credentials({
             name: "credentials",
@@ -73,34 +74,35 @@ export const nextAuthOptions: NextAuthOptions = {
 
             return token;
         },
-        session({ session, user }) {
+        session: async ({ token, session, user }) => {
+            console.log("HItted the session call back")
             if (session.user) {
-                // session.user.id = user.id;
-                session.user.name = user.name;
+                session.user.name = token.name;
+                session.user.id = user.id;
+                session.user.email = user.email;
+                console.log("There is session")
+
             }
+            console.log("No session")
             return session;
         },
 
-        async signIn({ user, account, profile, email, credentials }) {
-            return true
-        },
-        async redirect({ url, baseUrl }) {
-            return baseUrl
-        }
-
-
-
-
+        // async signIn({ user, account, profile, email, credentials }) {
+        //     return true
+        // },
+        // async redirect({ url, baseUrl }) {
+        //     return baseUrl
+        // }
     },
     jwt: {
         maxAge: 15 * 24 * 30 * 60, // 15 days
     },
     pages: {
         signIn: "/login",
-        newUser: "/libraries",
+        newUser: "/signup",
         // error: "/"
     },
-    secret: process.env.JWT_SECRET
+
 };
 
 export default NextAuth(nextAuthOptions);

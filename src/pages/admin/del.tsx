@@ -19,7 +19,7 @@ export default function Home() {
       name: file.name,
       type: file.type,
     });
-
+    console.log(file.type, "Fucking file type");
     console.log(data);
 
     const url = data.url;
@@ -30,8 +30,9 @@ export default function Home() {
       },
     });
 
-    // setUploadedFile(BUCKET_URL + file.name);
+    setUploadedFile(BUCKET_URL + "/" + file.name);
     setFile(null);
+    console.log(url, "the file url");
   };
 
   return (
@@ -52,6 +53,8 @@ export default function Home() {
         )}
         {uploadingStatus && <p>{uploadingStatus}</p>}
         {uploadedFile && <img src={uploadedFile} />}
+
+        {/* <img src="https://librarytracker.s3.amazonaws.com/gugo.png" alt="fu" /> */}
       </main>
     </div>
   );

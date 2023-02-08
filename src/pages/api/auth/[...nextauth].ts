@@ -3,14 +3,11 @@ import DiscordProvider from "next-auth/providers/discord";
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
-import { env } from "../../../env/server.mjs";
-import { prisma } from "../../../server/db";
+
 import Credentials from "next-auth/providers/credentials";
-// import { loginSchema } from "../../../components/auth/authSchema.js";
+import GoogleProvider from 'next-auth/providers/google'
 import * as z from "zod";
-import { verify } from "argon2";
-// import { redirect } from "next/dist/server/api-utils/index.js";
-// import { nextAuthOptions } from "../../../components/auth/auth.js";
+
 
 export const loginSchema = z.object({
     email: z.string().email(),
@@ -26,82 +23,15 @@ export const nextAuthOptions: NextAuthOptions = {
     debug: true,
     secret: process.env.JWT_SECRET,
     providers: [
-        Credentials({
-            name: "credentials",
-            credentials: {
-                email: {
-                    label: "Email",
-                    type: "email",
-                    placeholder: "ayodele@gmail.com"
-                },
-                password: { label: "Password", type: "password" },
-            },
-            authorize: async (credentials) => {
-                try {
-                    const { email, password } = await loginSchema.parseAsync(credentials);
-                    const result = await prisma.user.findFirst({
-                        where: { email },
-                    });
-                    if (!result) {
-                        console.log("no Result")
-                        return null
-                    };
+        GoogleProvider({
+            clientId: process.env.GOOGLE_ID!,
+            clientSecret: process.env.GOOGLE_SECRET!,
 
-                    const isValidPassword = await verify(result.password, password);
-                    if (!isValidPassword) {
-                        console.log("Password not valid")
-                        return null
-                    };
-
-                    console.log("login is success")
-
-                    return { id: result.id, email, fullName: result.fullName }
-                } catch {
-                    console.log("I am returning null")
-                    return null;
-                }
-            },
-        }),
+            // authorizationUrl: 'https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code',
+        })
     ],
 
-    callbacks: {
-        jwt: async ({ token, user }) => {
-            if (user) {
-                token.userId = user.id;
-                token.email = user.email;
-                token.username = user.name;
-            }
 
-            return token;
-        },
-        session: async ({ token, session, user }) => {
-            console.log("HItted the session call back")
-            if (session.user) {
-                session.user.name = token.name;
-                session.user.id = user.id;
-                session.user.email = user.email;
-                console.log("There is session")
-
-            }
-            console.log("No session")
-            return session;
-        },
-
-        // async signIn({ user, account, profile, email, credentials }) {
-        //     return true
-        // },
-        // async redirect({ url, baseUrl }) {
-        //     return baseUrl
-        // }
-    },
-    jwt: {
-        maxAge: 15 * 24 * 30 * 60, // 15 days
-    },
-    pages: {
-        signIn: "/login",
-        newUser: "/signup",
-        // error: "/"
-    },
 
 };
 

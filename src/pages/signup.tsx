@@ -7,7 +7,7 @@ import { api } from "../utils/api";
 import type { inferProcedureInput } from "@trpc/server";
 import type { AppRouter } from "../server/api/root";
 import { useState, ChangeEvent } from "react";
-
+import { signIn } from "next-auth/react";
 const Signup: NextPage = () => {
   const router = useRouter();
 
@@ -30,7 +30,10 @@ const Signup: NextPage = () => {
         <h3 className="text-center text-[2rem] font-medium tracking-wide">
           Sign Up
         </h3>
-        <button className="mt-3 flex w-[250px] cursor-pointer items-center gap-5 rounded-md border-[1px]  border-[rgba(142,142,147,0.22)] px-2 py-2 text-[#303030]">
+        <button
+          className="mt-3 flex w-[250px] cursor-pointer items-center gap-5 rounded-md border-[1px]  border-[rgba(142,142,147,0.22)] px-2 py-2 text-[#303030]"
+          onClick={() => signIn("google")}
+        >
           <span>
             <FcGoogle size={25} />
           </span>

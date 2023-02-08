@@ -5,13 +5,14 @@ import { Footer, LibraryCard } from "../../components/LandingPage";
 import { useSession, signOut, getSession } from "next-auth/react";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import Image from "next/legacy/image";
 
 const Libraries: NextPage = (props) => {
   const router = useRouter();
   const allLibraries = api.libRegistration.all.useQuery();
-  // const { data } = useSession();
-  const session = useSession();
-  console.log(session);
+  const { data } = useSession();
+
+  console.log(data);
 
   // if (status === "unauthenticated") {
   //   router.push("/login");
@@ -20,10 +21,25 @@ const Libraries: NextPage = (props) => {
   return (
     <>
       <main className="md:mt-5 md:flex md:flex-col md:items-center">
-        {/* {data?.user?.name ? <p>{data?.user.name}</p> : <p>No data </p>}
-        <pre>
-          <code>{JSON.stringify(data, null, 2)}</code>
-        </pre> */}
+        {data?.user && (
+          <div className="flex items-center justify-between">
+            <div></div>
+
+            <div className="mt-5 mr-5 flex items-center gap-2">
+              <div className="relative h-[50px] w-[50px] rounded-full">
+                <Image
+                  src={data?.user?.image!}
+                  alt="user-img"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-full"
+                />
+              </div>
+              {data?.user?.name ? <p>{data?.user.name}</p> : <p>No data </p>}
+            </div>
+          </div>
+        )}
+
         <div className="mt-5 mb-[3rem] flex flex-col items-center gap-5 md:grid md:grid-cols-2 md:space-x-4 md:space-y-5 md:pl-5 xl:grid-cols-3">
           {allLibraries.isLoading && <p>Fetching The libraries</p>}
           {allLibraries.isError && (

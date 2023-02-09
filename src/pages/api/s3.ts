@@ -33,7 +33,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
         const url = await s3.getSignedUrlPromise("putObject", fileParams);
 
-        res.status(200).json({ url });
+        res.status(200).json({ url, key: `${uniqueName}.${extension}` });
     } catch (err) {
         console.log(err);
         res.status(400).json({ message: err });

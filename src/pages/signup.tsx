@@ -1,3 +1,4 @@
+"use-client";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import type { NextPage } from "next";
@@ -32,7 +33,7 @@ const Signup: NextPage = () => {
         </h3>
         <button
           className="mt-3 flex w-[250px] cursor-pointer items-center gap-5 rounded-md border-[1px]  border-[rgba(142,142,147,0.22)] px-2 py-2 text-[#303030]"
-          onClick={() => signIn("google")}
+          onClick={() => signIn("google", { callbackUrl: "/libraries" })}
         >
           <span>
             <FcGoogle size={25} />

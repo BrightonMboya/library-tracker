@@ -1,13 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { ChangeEvent } from "react";
 import axios from "axios";
 
 const BUCKET_URL = "https://librarytracker.s3.amazonaws.com";
 
-export default function Home() {
+//@ts-ignore
+export default function Home({ formData, setFormData }) {
   const [file, setFile] = useState<any>();
   const [uploadingStatus, setUploadingStatus] = useState<any>();
   const [uploadedFile, setUploadedFile] = useState<any>();
+
+  useEffect(() => {
+    setFormData({
+      ...formData,
+      passportUrl: uploadedFile,
+    });
+  }, [uploadedFile]);
 
   const selectFile = (e: any) => {
     setFile(e.target.files[0]);
@@ -25,7 +33,6 @@ export default function Home() {
 
     const url = data.url;
     const key = data.key;
-    console.log(key, "the url to the img");
     let { data: newData } = await axios.put(url, file, {
       headers: {
         "Content-type": file.type,
@@ -34,23 +41,41 @@ export default function Home() {
     });
 
     setUploadedFile(BUCKET_URL + "/" + key);
+
     setFile(null);
     console.log(url, "the file url");
+
+    console.log(formData);
   };
 
   return (
-    <div className="container mx-auto flex min-h-screen items-center justify-center p-4">
+    <div className="flex flex-col items-center justify-center p-4">
       <main>
-        <p>Please select a file to upload</p>
-        <input type="file" onChange={(e) => selectFile(e)} />
+        <div className="flex h-[150px] w-[300px] cursor-pointer flex-col  items-center justify-center rounded-md border-2 border-dashed border-gray-500 md:h-[90px]">
+          <input
+            type="file"
+            accept="images/*"
+            onChange={(e) => {
+              selectFile(e);
+            }}
+            className="absolute h-[100px] border-2 opacity-0"
+          />
+          <p className="">Upload Your Passport</p>
+        </div>
+        {/* <input type="file" onChange={(e) => selectFile(e)} /> */}
         {file && (
           <>
             <p>Selected file: {file.name}</p>
             <button
+              type="button"
+              // onClick={() => {
+              //   uploadFile;
+
+              // }}
               onClick={uploadFile}
               className=" rounded-sm bg-purple-500 p-2 text-white shadow-md transition-all hover:bg-purple-700"
             >
-              Upload a File!
+              Upload File!
             </button>
           </>
         )}

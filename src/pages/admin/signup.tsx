@@ -1,6 +1,8 @@
 import React, { ChangeEvent } from "react";
 import BasicInfo from "../../components/admin/auth/BasicInfo";
 import DocUpload from "../../components/admin/auth/DocUpload";
+import UploadPassport from "../../components/admin/auth/UploadPassport";
+import UploadIdentityCard from "../../components/admin/auth/UploadIdentityCard";
 import { api } from "../../utils/api";
 import axios from "axios";
 
@@ -32,7 +34,6 @@ const Signup = () => {
   // initial empty states for the form
   const formStates = {
     fullName: "",
-    password: "",
     email: "",
     phoneNumber: "",
     country: "",
@@ -45,7 +46,7 @@ const Signup = () => {
 
   async function handleSubmit(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
-    const key = await uploadToS3(e);
+    console.log(formData);
   }
 
   const AuthForm = () => {
@@ -53,7 +54,13 @@ const Signup = () => {
       case 0:
         return <BasicInfo formData={formData} setFormData={setFormData} />;
       case 1:
-        return <DocUpload formData={formData} setFormData={setFormData} />;
+        return <UploadPassport formData={formData} setFormData={setFormData} />;
+
+      case 2:
+        return (
+          <UploadIdentityCard formData={formData} setFormData={setFormData} />
+        );
+
       default:
         return <BasicInfo formData={formData} setFormData={setFormData} />;
     }
@@ -61,7 +68,7 @@ const Signup = () => {
   return (
     <form className="flex flex-col items-center" onSubmit={handleSubmit}>
       {AuthForm()}
-      {page === 0 && (
+      {page <= 1 && (
         <button
           type="button"
           onClick={() => setPage(page + 1)}
@@ -71,7 +78,7 @@ const Signup = () => {
         </button>
       )}
 
-      {page === 1 && (
+      {page >= 1 && (
         <div className="flex flex-col items-center">
           <button
             type="button"

@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { api } from "../../utils/api";
 import { Footer, LibraryCard } from "../../components/LandingPage";

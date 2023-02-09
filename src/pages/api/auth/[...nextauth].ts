@@ -3,10 +3,10 @@ import DiscordProvider from "next-auth/providers/discord";
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
-
-import Credentials from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from 'next-auth/providers/google'
 import * as z from "zod";
+import { prisma } from "../../../server/db";
 
 
 export const loginSchema = z.object({
@@ -21,15 +21,58 @@ export const signUpSchema = loginSchema.extend({
 
 export const nextAuthOptions: NextAuthOptions = {
     debug: true,
-    secret: process.env.JWT_SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
+    // adapter: PrismaAdapter(prisma),
     providers: [
         GoogleProvider({
+
             clientId: process.env.GOOGLE_ID!,
             clientSecret: process.env.GOOGLE_SECRET!,
-
-            // authorizationUrl: 'https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code',
-        })
+            // authorization: {
+            //     params: {
+            //         prompt: "consent",
+            //         access_type: "offline",
+            //         response_type: "code"
+            //     }
+            // }
+        }),
     ],
+    callbacks: {
+        // session({ session, user }) {
+        //     if (session.user) {
+        //         session.user.id = user.id;
+        //     }
+        //     return session;
+        // },
+        async jwt({ token }) {
+            token.userRole = "admin"
+            return token
+        },
+    },
+
+    // jwt: {
+    //     maxAge: 15 * 24 * 30 * 60, // 15 days btw
+    //     secret: process.env.NEXT_SECRET,
+    // },
+
+    // callbacks: {
+    //     async jwt({ token, user }) {
+    //         return { ...token, ...user };
+    //     },
+    //     session({ session, user }) {
+    //         if (session.user) {
+    //             session.user.id = user.id;
+    //         }
+    //         return session;
+    //     },
+
+
+    // },
+
+    // pages: {
+    //     signIn: "/login",
+    // },
+
 
 
 

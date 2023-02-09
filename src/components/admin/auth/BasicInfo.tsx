@@ -23,21 +23,6 @@ const BasicInfo = ({ formData, setFormData }) => {
           }}
         />
         <Input
-          type="password"
-          label="Password"
-          placeholder="*******"
-          value={formData.password}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setFormData({
-              ...formData,
-              password: e.target.value,
-            });
-          }}
-        />
-      </div>
-
-      <div className="md:flex md:gap-5">
-        <Input
           type="email"
           label="Email"
           placeholder="Segun@yahoo.com"
@@ -49,6 +34,9 @@ const BasicInfo = ({ formData, setFormData }) => {
             });
           }}
         />
+      </div>
+
+      <div className="md:flex md:gap-5">
         <Input
           label="Phone Number"
           placeholder="+234784319877"
@@ -61,9 +49,6 @@ const BasicInfo = ({ formData, setFormData }) => {
             });
           }}
         />
-      </div>
-
-      <div className="md:flex md:gap-5">
         <Input
           type="text"
           label="Country"
@@ -76,6 +61,9 @@ const BasicInfo = ({ formData, setFormData }) => {
             });
           }}
         />
+      </div>
+
+      <div className="md:flex md:gap-5">
         <Input
           type="text"
           label="State"
@@ -88,20 +76,19 @@ const BasicInfo = ({ formData, setFormData }) => {
             });
           }}
         />
+        <Input
+          type="text"
+          label="Contact Adress"
+          placeholder="Lagos, Nigeria"
+          value={formData.adress}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setFormData({
+              ...formData,
+              adress: e.target.value,
+            });
+          }}
+        />
       </div>
-      <Input
-        type="text"
-        label="Contact Adress"
-        placeholder="Lagos, Nigeria"
-        classes="md:w-[530px] md:h-[70px]"
-        value={formData.adress}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setFormData({
-            ...formData,
-            adress: e.target.value,
-          });
-        }}
-      />
     </div>
   );
 };

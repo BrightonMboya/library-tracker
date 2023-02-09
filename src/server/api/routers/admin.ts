@@ -10,7 +10,6 @@ export const adminRouter = createTRPCRouter({
             z.object({
                 id: z.string().cuid().optional(),
                 fullName: z.string(),
-                password: z.string(),
                 email: z.string(),
                 phoneNumber: z.string(),
                 country: z.string(),

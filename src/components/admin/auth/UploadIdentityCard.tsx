@@ -59,6 +59,7 @@ export default function Home({ formData, setFormData }) {
           <>
             <p>Selected file: {file.name}</p>
             <button
+              type="button"
               onClick={async () => {
                 setUploadingStatus("Uploading the file to AWS S3");
 

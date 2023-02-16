@@ -14,6 +14,8 @@ const adminInfoSelect = Prisma.validator<Prisma.AdminInfoSelect>()({
     passportUrl: true,
     identityCardUrl: true,
 })
+
+
 export const adminRouter = createTRPCRouter({
     add: publicProcedure
         .input(

@@ -48,11 +48,6 @@ const Signup = () => {
   };
   const [formData, setFormData] = React.useState(formStates);
 
-  async function handleSubmit(e: ChangeEvent<HTMLFormElement>) {
-    e.preventDefault();
-    console.log(formData);
-  }
-
   const AuthForm = () => {
     switch (page) {
       case 0:

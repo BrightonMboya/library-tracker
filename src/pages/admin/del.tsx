@@ -54,7 +54,7 @@ export default function Home() {
             </button>
           </>
         )}
-        {uploadingStatus && <p>{uploadingStatus}</p>}
+
         {uploadedFile && <img src={uploadedFile} />}
 
         {/* <img src="https://librarytracker.s3.amazonaws.com/gugo.png" alt="fu" /> */}

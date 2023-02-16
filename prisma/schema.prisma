@@ -93,7 +93,7 @@ model LibraryInfo {
 model AdminInfo {
     id              String @id @default(cuid())
     fullName        String
-    email           String
+    email           String @unique
     phoneNumber     String
     country         String
     state           String

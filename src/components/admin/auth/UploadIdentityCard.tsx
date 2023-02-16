@@ -59,12 +59,36 @@ export default function Home({ formData, setFormData }) {
           <>
             <p>Selected file: {file.name}</p>
             <button
-              onClick={() => {
-                uploadFile;
+              onClick={async () => {
+                setUploadingStatus("Uploading the file to AWS S3");
+
+                let { data } = await axios.post("/api/s3", {
+                  name: file.name,
+                  type: file.type,
+                });
+                console.log(file.type, "Fucking file type");
+                console.log(data);
+
+                const url = data.url;
+                const key = data.key;
+                let { data: newData } = await axios.put(url, file, {
+                  headers: {
+                    "Content-type": file.type,
+                    "Access-Control-Allow-Origin": "*",
+                  },
+                });
+                console.log(`${BUCKET_URL}/${key}`);
+
+                setUploadedFile(BUCKET_URL + "/" + key);
                 setFormData({
                   ...formData,
-                  identityCardUrl: uploadedFile,
+                  identityCardUrl: `${BUCKET_URL}/${key}`,
                 });
+
+                // setFile(null);
+                // console.log(url, "the file url");
+
+                console.log(formData);
               }}
               className=" rounded-sm bg-purple-500 p-2 text-white shadow-md transition-all hover:bg-purple-700"
             >

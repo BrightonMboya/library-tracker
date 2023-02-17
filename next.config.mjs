@@ -10,7 +10,11 @@ const config = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["images.unsplash.com", "lh3.googleusercontent.com"],
+    domains: [
+      "images.unsplash.com",
+      "lh3.googleusercontent.com",
+      "librarytracker.s3.amazonaws.com",
+    ],
   },
   i18n: {
     locales: ["en"],

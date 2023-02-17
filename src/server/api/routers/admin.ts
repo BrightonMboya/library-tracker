@@ -63,6 +63,25 @@ export const adminRouter = createTRPCRouter({
                 });
             }
             return admin
+        }),
+    approve: publicProcedure
+        .input(
+            z.object({
+                id: z.string(),
+                approve: z.boolean(),
+            })
+        )
+        .mutation(async ({ input }) => {
+            const { id, approve } = input;
+            const approveAdmin = await prisma.adminInfo.update({
+                where: {
+                    id: id,
+                },
+                data: {
+                    approved: approve
+                }
+            })
+            return approveAdmin
         })
 })
 

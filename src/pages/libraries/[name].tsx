@@ -16,7 +16,8 @@ const Index = () => {
   const [showServices, setShowServices] = useState(false);
   const [showEvents, setShowEvents] = useState(false);
   const [showGallery, setShowGallery] = useState(false);
-  const id = useRouter().query.name as string;
+  const router = useRouter();
+  const id = router.query.name as string;
 
   const librariesQuery = api.library.byId.useQuery({ id }); // query to fetch the libraries
   const approveLibQuery = api.libRegistration.approve.useMutation();
@@ -38,6 +39,7 @@ const Index = () => {
     try {
       await approveLibQuery.mutateAsync(input);
       utils.libRegistration.invalidate();
+      router.reload();
     } catch (cause) {
       console.error({ cause }, "Failed to approve the library");
     }

@@ -2,6 +2,7 @@ import { createTRPCRouter, publicProcedure } from "../trpc";
 import { Prisma } from "@prisma/client";
 import { z } from 'zod';
 import { prisma } from "../../db"
+import { TRPCError } from "@trpc/server";
 
 const adminInfoSelect = Prisma.validator<Prisma.AdminInfoSelect>()({
     id: true,
@@ -13,6 +14,7 @@ const adminInfoSelect = Prisma.validator<Prisma.AdminInfoSelect>()({
     adress: true,
     passportUrl: true,
     identityCardUrl: true,
+    approved: true
 })
 
 
@@ -28,7 +30,8 @@ export const adminRouter = createTRPCRouter({
                 state: z.string(),
                 adress: z.string(),
                 passportUrl: z.string(),
-                identityCardUrl: z.string()
+                identityCardUrl: z.string(),
+                approved: z.boolean(),
             }),
         )
         .mutation(async ({ input }) => {
@@ -37,6 +40,29 @@ export const adminRouter = createTRPCRouter({
                 select: adminInfoSelect
             })
             return adminInfo;
+        }),
+    all: publicProcedure.query(async ({ ctx }) => {
+        return ctx.prisma.adminInfo.findMany({ select: adminInfoSelect, where: {} })
+    }),
+    byId: publicProcedure
+        .input(
+            z.object({
+                id: z.string(),
+            }),
+        )
+        .query(async ({ input }) => {
+            const { id } = input;
+            const admin = await prisma.adminInfo.findUnique({
+                where: { id },
+                select: adminInfoSelect,
+            });
+            if (!admin) {
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "The Admin you are looking for is not found"
+                });
+            }
+            return admin
         })
 })
 

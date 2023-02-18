@@ -31,7 +31,6 @@ export const adminRouter = createTRPCRouter({
                 adress: z.string(),
                 passportUrl: z.string(),
                 identityCardUrl: z.string(),
-                approved: z.boolean(),
             }),
         )
         .mutation(async ({ input }) => {

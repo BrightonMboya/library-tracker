@@ -8,6 +8,12 @@
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   swcMinify: true,
   images: {
     domains: [

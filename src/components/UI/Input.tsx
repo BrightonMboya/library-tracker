@@ -1,4 +1,3 @@
-import React, { ChangeEvent } from "react";
 interface InputProps {
   label: string;
   placeholder: string;

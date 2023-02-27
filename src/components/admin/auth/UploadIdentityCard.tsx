@@ -21,8 +21,6 @@ export default function Home({ formData, setFormData }) {
       name: file.name,
       type: file.type,
     });
-    console.log(file.type, "Fucking file type");
-    console.log(data);
 
     const url = data.url;
     const key = data.key;
@@ -35,7 +33,10 @@ export default function Home({ formData, setFormData }) {
 
     setUploadedFile(BUCKET_URL + "/" + key);
     setFile(null);
-    console.log(url, "the file url");
+    setFormData({
+      ...formData,
+      identityCardUrl: `${BUCKET_URL}/${key}`,
+    });
 
     console.log(formData);
   };
@@ -78,16 +79,13 @@ export default function Home({ formData, setFormData }) {
                     "Access-Control-Allow-Origin": "*",
                   },
                 });
-                console.log(`${BUCKET_URL}/${key}`);
+                // console.log(`${BUCKET_URL}/${key}`);
 
-                setUploadedFile(BUCKET_URL + "/" + key);
+                // setUploadedFile(BUCKET_URL + "/" + key);
                 setFormData({
                   ...formData,
                   identityCardUrl: `${BUCKET_URL}/${key}`,
                 });
-
-                // setFile(null);
-                // console.log(url, "the file url");
 
                 console.log(formData);
               }}
@@ -97,8 +95,15 @@ export default function Home({ formData, setFormData }) {
             </button>
           </>
         )}
-        {uploadingStatus && <p>{uploadingStatus}</p>}
-        {uploadedFile && <img src={uploadedFile} />}
+
+        <img
+          src={
+            `${formData.identityCardUrl}`
+              ? `${formData.identityCardUrl}`
+              : "/placeholder.png"
+          }
+          className="mt-5 w-[200px]"
+        />
       </main>
     </div>
   );

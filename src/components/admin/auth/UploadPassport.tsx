@@ -10,13 +10,6 @@ export default function Home({ formData, setFormData }) {
   const [uploadingStatus, setUploadingStatus] = useState<any>();
   const [uploadedFile, setUploadedFile] = useState<any>();
 
-  // useEffect(() => {
-  //   setFormData({
-  //     ...formData,
-  //     passportUrl: uploadedFile,
-  //   });
-  // }, [uploadedFile]);
-
   const selectFile = (e: any) => {
     setFile(e.target.files[0]);
   };
@@ -28,8 +21,6 @@ export default function Home({ formData, setFormData }) {
       name: file.name,
       type: file.type,
     });
-    console.log(file.type, "Fucking file type");
-    console.log(data);
 
     const url = data.url;
     const key = data.key;
@@ -43,21 +34,13 @@ export default function Home({ formData, setFormData }) {
     setUploadedFile(BUCKET_URL + "/" + key);
     setFormData({
       ...formData,
-      passportUrl: uploadedFile,
+      passportUrl: `${BUCKET_URL}/${key}`,
     });
 
     setFile(null);
     console.log(url, "the file url");
 
     console.log(formData);
-  };
-
-  const UpdateFormData = () => {
-    // setFormData({
-    //   ...formData,
-    //   passportUrl: uploadedFile,
-    // });
-    return <img src={uploadedFile} />;
   };
 
   return (
@@ -74,7 +57,6 @@ export default function Home({ formData, setFormData }) {
           />
           <p className="">Upload Your Passport</p>
         </div>
-        {/* <input type="file" onChange={(e) => selectFile(e)} /> */}
         {file && (
           <>
             <p>Selected file: {file.name}</p>
@@ -98,27 +80,30 @@ export default function Home({ formData, setFormData }) {
                     "Access-Control-Allow-Origin": "*",
                   },
                 });
-                console.log(`${BUCKET_URL}/${key}`);
 
-                setUploadedFile(BUCKET_URL + "/" + key);
+                // setUploadedFile(BUCKET_URL + "/" + key);
                 setFormData({
                   ...formData,
                   passportUrl: `${BUCKET_URL}/${key}`,
                 });
 
-                // setFile(null);
-                // console.log(url, "the file url");
-
                 console.log(formData);
               }}
-              // onClick={uploadFile}
-              className=" rounded-sm bg-purple-500 p-2 text-white shadow-md transition-all hover:bg-purple-700"
+              className="rounded-sm bg-purple-500 p-2 text-white shadow-md transition-all hover:bg-purple-700"
             >
               Upload File!
             </button>
           </>
         )}
-        {uploadedFile && <UpdateFormData />}
+
+        <img
+          src={
+            `${formData.passportUrl}`
+              ? `${formData.passportUrl}`
+              : "/placeholder.png"
+          }
+          className="mt-5 w-[200px]"
+        />
       </main>
     </div>
   );

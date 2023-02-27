@@ -1,6 +1,5 @@
 import React, { ChangeEvent } from "react";
 import BasicInfo from "../../components/admin/auth/BasicInfo";
-import DocUpload from "../../components/admin/auth/DocUpload";
 import UploadPassport from "../../components/admin/auth/UploadPassport";
 import UploadIdentityCard from "../../components/admin/auth/UploadIdentityCard";
 import { api } from "../../utils/api";

@@ -7,7 +7,7 @@ import {
   GalleryTab,
   ServicesTab,
 } from "../../components/admin/LibInfo";
-import { Footer } from "../../components/LandingPage";
+import { Footer, Nav } from "../../components/LandingPage";
 import type { inferProcedureInput } from "@trpc/server";
 import type { AppRouter } from "../../server/api/root";
 
@@ -51,7 +51,8 @@ const Index = () => {
 
   return (
     <>
-      <main className="mt-3 md:flex md:flex-col md:items-center ">
+      <Nav />
+      <main className="mt-[2rem] md:flex md:flex-col md:items-center ">
         <div className="mb-[2rem] pl-5">
           <h3 className="text-xl font-medium">{librariesQuery.data?.name}</h3>
           <h3>{librariesQuery.data?.adress}</h3>

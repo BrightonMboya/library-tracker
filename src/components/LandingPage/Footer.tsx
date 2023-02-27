@@ -19,9 +19,9 @@ const Footer = () => {
           <h3 className="text-xl font-medium uppercase tracking-wide">
             Company
           </h3>
-          <Link href="#">Sign In</Link>
+          <Link href="/signin">Sign In</Link>
           <Link href="#">Sign Up</Link>
-          <Link href="#">Library Administrator</Link>
+          <Link href="/superadmin">Library Administrator</Link>
         </div>
 
         <div className="flex flex-col gap-3">

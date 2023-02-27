@@ -1,5 +1,5 @@
 import { api } from "../../../utils/api";
-import { Footer } from "../../../components/LandingPage";
+import { Footer, Nav } from "../../../components/LandingPage";
 import type { inferProcedureInput } from "@trpc/server";
 import type { AppRouter } from "../../../server/api/root";
 import { useRouter } from "next/router";
@@ -29,7 +29,8 @@ const Index = () => {
   }
   return (
     <>
-      <main className="mt-5 flex flex-col">
+      <Nav />
+      <main className="mt-5 flex flex-col md:mt-[2rem] md:mb-[3rem] md:flex-row  md:justify-center">
         <section className="ml-5 w-[335px] rounded-t-md border-t-[4px] border-t-[#CCE1FC] bg-[#f6f6f6] px-3 pb-5">
           <h3 className="mt-3 text-lg font-medium">Basic Information</h3>
           {/* show the aprove buttons if the library is not approved and the session role is superadmin */}
@@ -69,29 +70,31 @@ const Index = () => {
           <p>{adminQuery.data?.adress}</p>
         </section>
 
-        <section className="ml-5 mt-[2rem] w-[335px] rounded-t-md border-t-[4px] border-t-[#CCE1FC] bg-[#f6f6f6] px-3 pb-4">
-          <h3 className="mt-3 mb-5 text-lg font-medium">Identity Card</h3>
-          <div className="relative h-[200px] w-[300px]">
-            <Image
-              src={adminQuery.data?.identityCardUrl as string}
-              alt="Idenity Card"
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
-        </section>
+        <div className="md:space-y-5 lg:flex">
+          <section className="ml-5 mt-[2rem] h-[280px] w-[335px] rounded-t-md border-t-[4px] border-t-[#CCE1FC] bg-[#f6f6f6] px-3 pb-4 md:mt-0">
+            <h3 className="mt-3 mb-5 text-lg font-medium">Identity Card</h3>
+            <div className="relative h-[200px] w-[300px]">
+              <Image
+                src={adminQuery.data?.identityCardUrl as string}
+                alt="Idenity Card"
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
+          </section>
 
-        <section className="ml-5 mt-[2rem] mb-[2rem] w-[335px] rounded-t-md border-t-[4px] border-t-[#CCE1FC] bg-[#f6f6f6] px-3 pb-4">
-          <h3 className="mt-3 mb-5 text-lg font-medium">Passport Card</h3>
-          <div className="relative h-[200px] w-[300px]">
-            <Image
-              src={adminQuery.data?.passportUrl as string}
-              alt="passport card"
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
-        </section>
+          <section className="ml-5 mt-[2rem] mb-[2rem] h-[280px] w-[335px] rounded-t-md border-t-[4px] border-t-[#CCE1FC] bg-[#f6f6f6] px-3 pb-4 md:mt-0">
+            <h3 className="mt-3 mb-5 text-lg font-medium">Passport Card</h3>
+            <div className="relative h-[200px] w-[300px]">
+              <Image
+                src={adminQuery.data?.passportUrl as string}
+                alt="passport card"
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
+          </section>
+        </div>
       </main>
       <Footer />
     </>

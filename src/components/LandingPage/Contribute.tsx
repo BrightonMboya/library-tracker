@@ -1,4 +1,5 @@
 import Image from "next/legacy/image";
+import Link from "next/link";
 
 const Contribute = () => {
   return (
@@ -41,9 +42,11 @@ const Contribute = () => {
               Start tracking a library now
             </h3>
 
-            <button className="absolute bottom-3 right-2 cursor-pointer rounded-md bg-white px-3 py-1 font-medium text-blue md:bottom-12 md:px-5  md:py-3 md:text-lg">
-              Find a Library
-            </button>
+            <Link href="/libraries">
+              <button className="absolute bottom-3 right-2 cursor-pointer rounded-md bg-white px-3 py-1 font-medium text-blue md:bottom-12 md:px-5  md:py-3 md:text-lg">
+                Find a Library
+              </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 // "use client";
 
 import { api } from "../../utils/api";
-import { Footer, LibraryCard } from "../../components/LandingPage";
+import { Footer, LibraryCard, Nav } from "../../components/LandingPage";
 import { useSession, signOut, getSession } from "next-auth/react";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -20,6 +20,7 @@ const Libraries: NextPage = (props) => {
 
   return (
     <>
+      <Nav />
       <main className="md:mt-5 md:flex md:flex-col md:items-center">
         {data?.user && (
           <div className="flex items-center justify-between">

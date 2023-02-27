@@ -1,24 +1,25 @@
 import { api } from "../../../utils/api";
 import Link from "next/link";
-import { Footer } from "../../../components/LandingPage";
+import { Footer, Nav } from "../../../components/LandingPage";
 
 const Admins = () => {
   const admins = api.adminRouter.all.useQuery();
   return (
     <>
-      <main>
+      <Nav />
+      <main className="md:flex md:flex-col md:items-center">
         {admins.isLoading && <p>Fetching Admins Info</p>}
         {admins.isError && (
           <p>Encountered the error while fetching, please check your network</p>
         )}
 
-        <section className="mb-[5rem] flex flex-col items-center justify-center space-y-5">
+        <section className="mb-[5rem] flex flex-col items-center justify-center space-y-5 md:mt-[2rem] md:grid md:grid-cols-2 md:gap-5 md:space-y-0">
           {admins.data?.map((admin) => (
             <div
               key={admin.id}
               className="h-[140px] w-[331px] rounded-md bg-[#f6f6f6]"
             >
-              <div className="mt-5 space-y-1 pl-3 pt-2">
+              <div className="mt-5 space-y-1 pl-3 pt-2 md:mt-0 ">
                 <h3 className="text-lg font-medium text-blue">
                   {admin.fullName}
                 </h3>

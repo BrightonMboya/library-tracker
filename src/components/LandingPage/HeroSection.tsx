@@ -10,7 +10,7 @@ const HeroSection = () => {
   return (
     <React.Fragment>
       <Nav />
-      <div className="flex min-h-screen flex-col items-center justify-center">
+      <div className="mb-[2rem] flex min-h-screen flex-col items-center justify-center bg-[url('../../public/hero.png')] object-contain">
         <h3 className="text-xl font-medium tracking-wide">
           Libraries are here .
         </h3>

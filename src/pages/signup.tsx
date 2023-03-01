@@ -105,6 +105,14 @@ const Signup: NextPage = () => {
 
           <button
             type="submit"
+            // type="button"
+            onClick={() =>
+              signIn("email", {
+                callbackUrl: "/libraries",
+                redirect: false,
+                sendVerificationRequest: true,
+              })
+            }
             className="mt-5 w-[250px] cursor-pointer rounded-md bg-blue px-2 py-2 font-medium text-white"
           >
             Continue With Email
@@ -117,6 +125,19 @@ const Signup: NextPage = () => {
             </Link>
           </div>
         </form>
+
+        <button
+          type="submit"
+          // type="button"
+          onClick={() =>
+            signIn("email", {
+              callbackUrl: "/libraries",
+            })
+          }
+          className="mt-5 w-[250px] cursor-pointer rounded-md bg-blue px-2 py-2 font-medium text-white"
+        >
+          Click me Daddy
+        </button>
       </div>
     </main>
   );

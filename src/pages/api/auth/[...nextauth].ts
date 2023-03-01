@@ -2,6 +2,8 @@ import NextAuth, { type NextAuthOptions } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import nodemailer from "nodemailer";
+import EmailProvider from "next-auth/providers/email";
 
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from 'next-auth/providers/google'
@@ -22,21 +24,35 @@ export const signUpSchema = loginSchema.extend({
 export const nextAuthOptions: NextAuthOptions = {
     debug: true,
     secret: process.env.NEXTAUTH_SECRET,
-    // adapter: PrismaAdapter(prisma),
+    adapter: PrismaAdapter(prisma),
     providers: [
         GoogleProvider({
 
             clientId: process.env.GOOGLE_ID!,
             clientSecret: process.env.GOOGLE_SECRET!,
-            // authorization: {
-            //     params: {
-            //         prompt: "consent",
-            //         access_type: "offline",
-            //         response_type: "code"
-            //     }
-            // }
+        }),
+        // EmailProvider({
+        //     server: process.env.EMAIL_SERVER!,
+        //     from: process.env.EMAIL_FROM!,
+
+        // })
+        EmailProvider({
+            server: {
+                host: process.env.EMAIL_SERVER_HOST,
+                //@ts-ignore
+                port: process.env.EMAIL_SERVER_PORT as String,
+                auth: {
+                    user: process.env.EMAIL_SERVER_USER,
+                    pass: process.env.EMAIL_SERVER_PASSWORD,
+                },
+            },
+            from: process.env.EMAIL_FROM,
+            maxAge: 10 * 60, // Magic links are valid for 10 min only
         }),
     ],
+    pages: {
+        signIn: "/login",
+    },
     callbacks: {
         // session({ session, user }) {
         //     if (session.user) {
@@ -79,86 +95,4 @@ export const nextAuthOptions: NextAuthOptions = {
 };
 
 export default NextAuth(nextAuthOptions);
-
-// export const authOptions: NextAuthOptions = {
-//   // Include user.id on session
-//   callbacks: {
-//     session({ session, user }) {
-//       if (session.user) {
-//         session.user.id = user.id;
-//       }
-//       return session;
-//     },
-
-//     jwt: async ({ token, user }) => {
-//       if (user) {
-//         token.email = user.email;
-//         token.id = user.id
-//       }
-
-//       return token;
-//     },
-//   },
-
-//   // Configuring the JWT
-//   jwt: {
-//     secret: "super-secret",
-//     maxAge: 15 * 24 * 30 * 60, // 15 days btw
-//   },
-
-//   // creating custom pages for auth
-
-//   pages: {
-//     signIn: "/signup",
-//     newUser: "/libraries",  // new user will be redirected here after sign in
-//   },
-//   // Configure one or more authentication providers
-//   adapter: PrismaAdapter(prisma),
-//   providers: [
-//     DiscordProvider({
-//       clientId: env.DISCORD_CLIENT_ID,
-//       clientSecret: env.DISCORD_CLIENT_SECRET,
-//     }),
-
-//     Credentials({
-//       name: "credentials",
-//       credentials: {
-//         email: {
-//           label: "Email",
-//           type: "email",
-//           placeholder: "segun@yahoo.com"
-//         },
-//         password: { label: "Password", type: "password" }
-//       },
-//       authorize: async (credentials, request) => {
-//         // login logic
-//         const creds = await loginSchema.parseAsync(credentials);
-
-//         const user = await prisma.user.findFirst({
-//           where: { email: creds.email }
-//         });
-
-//         if (!user) {
-//           return null;
-//         }
-
-//         // check of the password is valid
-//         // const isValidPassword = await argon2.verify(user.password, creds.password);\
-//         const isValidPassword = true;
-
-//         if (!isValidPassword) {
-//           return null;
-//         }
-
-//         return {
-//           id: user.id,
-//           email: user.email,
-//           fullName: user.fullName
-//         }
-
-//       }
-//     })
-
-//   ],
-// };
 

@@ -5,11 +5,9 @@ import {
   Contribute,
   LibraryNearYou,
 } from "../components/LandingPage";
-import { getSession, signIn, signOut, useSession } from "next-auth/react";
-import type { GetServerSideProps } from "next";
+import { useSession, signIn, signOut } from "next-auth/react";
 
-const Home: NextPage = (props) => {
-  console.log(props);
+const Home: NextPage = () => {
   const { data: session } = useSession();
   // console.log(sessionData?.user, "is it?");
   return (
@@ -30,16 +28,15 @@ const Home: NextPage = (props) => {
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession(context);
-  return {
-    props: { session },
-  };
-};
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   const session = await getSession(context);
+//   return {
+//     props: { session },
+//   };
+// };
 
 // const AuthShowcase: React.FC = () => {
 //   const { data: sessionData } = useSession();
-
 //   return (
 //     <div className="flex flex-col items-center justify-center gap-4">
 //       <p className="text-center text-2xl text-white">

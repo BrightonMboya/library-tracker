@@ -26,6 +26,7 @@ const Signup: NextPage = () => {
   };
 
   const [formData, setFormData] = useState(formStates);
+  const [email, setEmail] = useState("");
 
   return (
     <main>
@@ -45,7 +46,7 @@ const Signup: NextPage = () => {
             Continue with Google
           </button>
         </div>
-        <form
+        {/* <form
           className="mt-5 space-y-5"
           onSubmit={async (e) => {
             e.preventDefault();
@@ -124,20 +125,42 @@ const Signup: NextPage = () => {
               <p className="cursor-pointer font-medium text-blue">login</p>
             </Link>
           </div>
-        </form>
+        </form> */}
 
-        <button
-          type="submit"
-          // type="button"
-          onClick={() =>
-            signIn("email", {
-              callbackUrl: "/libraries",
-            })
-          }
-          className="mt-5 w-[250px] cursor-pointer rounded-md bg-blue px-2 py-2 font-medium text-white"
+        <form
+          onSubmit={(e: ChangeEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            if (!email) return alert("Email is required");
+            signIn("email", { email, redirect: false });
+          }}
         >
-          Click me Daddy
-        </button>
+          <Input
+            label="Email"
+            placeholder="Segun@yahoo.com"
+            type="email"
+            value={email}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setEmail(e.target.value);
+            }}
+            // onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            //   setFormData({
+            //     ...formData,
+            //     email: e.target.value,
+            //   });
+            // }}
+          />
+          <button
+            type="submit"
+            // onClick={() =>
+            //   signIn("email", {
+            //     redirect: false,
+            //   })
+            // }
+            className="mt-5 w-[250px] cursor-pointer rounded-md bg-blue px-2 py-2 font-medium text-white"
+          >
+            Click me Daddy
+          </button>
+        </form>
       </div>
     </main>
   );

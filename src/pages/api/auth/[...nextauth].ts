@@ -31,16 +31,11 @@ export const nextAuthOptions: NextAuthOptions = {
             clientId: process.env.GOOGLE_ID!,
             clientSecret: process.env.GOOGLE_SECRET!,
         }),
-        // EmailProvider({
-        //     server: process.env.EMAIL_SERVER!,
-        //     from: process.env.EMAIL_FROM!,
-
-        // })
         EmailProvider({
             server: {
                 host: process.env.EMAIL_SERVER_HOST,
                 //@ts-ignore
-                port: process.env.EMAIL_SERVER_PORT as String,
+                port: process.env.EMAIL_SERVER_PORT,
                 auth: {
                     user: process.env.EMAIL_SERVER_USER,
                     pass: process.env.EMAIL_SERVER_PASSWORD,
@@ -51,46 +46,20 @@ export const nextAuthOptions: NextAuthOptions = {
         }),
     ],
     pages: {
-        signIn: "/login",
+        signIn: "/signup",
     },
-    callbacks: {
-        // session({ session, user }) {
-        //     if (session.user) {
-        //         session.user.id = user.id;
-        //     }
-        //     return session;
-        // },
-        async jwt({ token }) {
-            token.userRole = "admin"
-            return token
-        },
-    },
-
-    // jwt: {
-    //     maxAge: 15 * 24 * 30 * 60, // 15 days btw
-    //     secret: process.env.NEXT_SECRET,
-    // },
-
     // callbacks: {
-    //     async jwt({ token, user }) {
-    //         return { ...token, ...user };
+    //     // session({ session, user }) {
+    //     //     if (session.user) {
+    //     //         session.user.id = user.id;
+    //     //     }
+    //     //     return session;
+    //     // },
+    //     async jwt({ token }) {
+    //         token.userRole = "admin"
+    //         return token
     //     },
-    //     session({ session, user }) {
-    //         if (session.user) {
-    //             session.user.id = user.id;
-    //         }
-    //         return session;
-    //     },
-
-
     // },
-
-    // pages: {
-    //     signIn: "/login",
-    // },
-
-
-
 
 };
 

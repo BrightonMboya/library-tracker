@@ -8,15 +8,14 @@ import {
 import { getSession, signIn, signOut, useSession } from "next-auth/react";
 import type { GetServerSideProps } from "next";
 
-import { api } from "../utils/api";
-
 const Home: NextPage = (props) => {
   console.log(props);
-  const { data: sessionData } = useSession();
+  const { data: session } = useSession();
   // console.log(sessionData?.user, "is it?");
   return (
     <>
       <main className="">
+        {/* {session && <p>{session.user?.email}</p>} */}
         <HeroSection />
         <section className="container flex flex-col items-center  justify-center md:max-w-[100ch] xl:max-w-none">
           <LibraryNearYou />

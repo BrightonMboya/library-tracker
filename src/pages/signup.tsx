@@ -132,6 +132,10 @@ const Signup: NextPage = () => {
             e.preventDefault();
             if (!email) return alert("Email is required");
             signIn("email", { email, redirect: false });
+            alert(
+              "We have sent an email verification to your Inbox. Check your Spam folder if you dont see it"
+            );
+            setEmail("");
           }}
         >
           <Input

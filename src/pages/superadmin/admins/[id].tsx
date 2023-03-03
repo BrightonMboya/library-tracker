@@ -4,6 +4,7 @@ import type { inferProcedureInput } from "@trpc/server";
 import type { AppRouter } from "../../../server/api/root";
 import { useRouter } from "next/router";
 import Image from "next/legacy/image";
+import Link from "next/link";
 
 const Index = () => {
   const router = useRouter();
@@ -54,6 +55,13 @@ const Index = () => {
               </button>
             </div>
           )}
+
+          <Link href={`/superadmin/admins/edit/${id}`}>
+            <button className="mt-5 cursor-pointer rounded-md bg-blue px-4 py-2 text-lg font-medium text-white">
+              Edit
+            </button>
+          </Link>
+
           <p className="mt-3 text-lg font-medium">Full Name</p>
           <p>{adminQuery.data?.fullName}</p>
 
@@ -83,7 +91,7 @@ const Index = () => {
             </div>
           </section>
 
-          <section className="ml-5 mt-[2rem] mb-[2rem] h-[280px] w-[335px] rounded-t-md border-t-[4px] border-t-[#CCE1FC] bg-[#f6f6f6] px-3 pb-4 md:mt-0">
+          <section className="ml-5 mt-[2rem] mb-[2rem] h-[280px] w-[335px] rounded-t-md border-t-[4px] border-t-[#CCE1FC] bg-[#f6f6f6] px-3 pb-4 md:mb-0 md:mt-0 md:pb-0">
             <h3 className="mt-3 mb-5 text-lg font-medium">Passport Card</h3>
             <div className="relative h-[200px] w-[300px]">
               <Image

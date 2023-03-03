@@ -13,7 +13,7 @@ const Admins = () => {
           <p>Encountered the error while fetching, please check your network</p>
         )}
 
-        <section className="mb-[5rem] flex flex-col items-center justify-center space-y-5 md:mt-[2rem] md:grid md:grid-cols-2 md:gap-5 md:space-y-0">
+        <section className="mb-[5rem] mt-[2rem] flex flex-col items-center justify-center space-y-5 md:grid md:grid-cols-2 md:gap-5 md:space-y-0">
           {admins.data?.map((admin) => (
             <div
               key={admin.id}

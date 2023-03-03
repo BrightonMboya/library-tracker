@@ -82,7 +82,6 @@ const Signup = () => {
         };
 
         try {
-          console.log(input, "This is correct right");
           await addAdmin.mutateAsync(input);
           // console.log(adminId, "Direct me here");
           setFormData(formStates);

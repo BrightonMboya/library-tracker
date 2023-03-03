@@ -17,21 +17,22 @@ const adminInfoSelect = Prisma.validator<Prisma.AdminInfoSelect>()({
     approved: true
 })
 
+const adminObject = {
+    id: z.string().cuid().optional(),
+    fullName: z.string(),
+    email: z.string(),
+    phoneNumber: z.string(),
+    country: z.string(),
+    state: z.string(),
+    adress: z.string(),
+    passportUrl: z.string(),
+    identityCardUrl: z.string(),
+}
 
 export const adminRouter = createTRPCRouter({
     add: publicProcedure
         .input(
-            z.object({
-                id: z.string().cuid().optional(),
-                fullName: z.string(),
-                email: z.string(),
-                phoneNumber: z.string(),
-                country: z.string(),
-                state: z.string(),
-                adress: z.string(),
-                passportUrl: z.string(),
-                identityCardUrl: z.string(),
-            }),
+            z.object(adminObject),
         )
         .mutation(async ({ input }) => {
             const adminInfo = await prisma.adminInfo.create({
@@ -81,7 +82,23 @@ export const adminRouter = createTRPCRouter({
                 }
             })
             return approveAdmin
-        })
+        }),
+    edit: publicProcedure
+        .input(
+            z.object(adminObject)
+        )
+        .mutation(async ({ input }) => {
+            const { id, ...rest } = input;
+            const editAdmin = await prisma.adminInfo.update({
+                where: {
+                    id: id,
+                },
+                data: rest
+            })
+            return editAdmin
+        }
+        ),
+
 })
 
 export default adminRouter;

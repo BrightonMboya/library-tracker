@@ -10,6 +10,15 @@ export const library = createTRPCRouter({
     all: publicProcedure.query(async ({ ctx }) => {
         return ctx.prisma.libraryInfo.findMany();
     }),
+    titles: publicProcedure.query(async ({ ctx }) => {
+        const data: string[] = [];
+        const libraries = await ctx.prisma.libraryInfo.findMany();
+        libraries.forEach((library) => {
+            data.push(library.name);
+        });
+        return data;
+    }),
+
     list: publicProcedure
         .input(
             z.object({

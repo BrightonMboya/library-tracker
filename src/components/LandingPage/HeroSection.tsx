@@ -1,9 +1,6 @@
 import React from "react";
 import Nav from "./Nav";
-import { FaBars } from "react-icons/fa";
-import { ImCross } from "react-icons/im";
-import Link from "next/link";
-import Image from "next/legacy/image";
+import Search from "./Search";
 
 const HeroSection = () => {
   const [showNav, setShowNav] = React.useState(false);
@@ -14,11 +11,12 @@ const HeroSection = () => {
         <h3 className="text-xl font-medium tracking-wide">
           Libraries are here .
         </h3>
-        <input
+        {/* <input
           type="search"
           placeholder="Find a Library"
           className="mt-5 rounded-md border-2 border-slate-400 bg-transparent px-2 py-1 focus:outline-none"
-        />
+        /> */}
+        <Search />
       </div>
     </React.Fragment>
   );

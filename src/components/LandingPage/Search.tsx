@@ -64,7 +64,7 @@ export default function Search() {
   }, [debounceQuery]);
 
   return (
-    <div>
+    <div className="relatives">
       <input
         className="mt-5 rounded-md border-2 border-slate-400 bg-transparent px-2 py-1 focus:outline-none"
         value={query}
@@ -74,7 +74,7 @@ export default function Search() {
         }
         placeholder="Find a Library"
       />
-      <div className="mt-5 flex flex-col items-center text-gray-700">
+      <div className="absolute  mt-5 flex flex-col items-center space-y-2 text-gray-700">
         {suggestions.map((suggestion) => (
           <Link href={`/libraries/${suggestion.id}`} key={suggestion.id}>
             <p className="cursor-pointer">{suggestion.name}</p>

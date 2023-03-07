@@ -3,7 +3,6 @@ import { useEffect, useState, type ChangeEvent } from "react";
 import Link from "next/link";
 
 let libraries: { id: string; name: string }[] = [];
-console.log(libraries, "fuckin libraries");
 
 function GetAutoCompleteResult(
   query: string,
@@ -80,6 +79,10 @@ export default function Search() {
             <p className="cursor-pointer">{suggestion.name}</p>
           </Link>
         ))}
+
+        {suggestions.length === 0 && query.length > 0 && (
+          <p className="cursor-pointer text-red-500">No library found</p>
+        )}
       </div>
     </div>
   );

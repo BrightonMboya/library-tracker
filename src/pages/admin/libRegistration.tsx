@@ -1,6 +1,6 @@
 import type { inferProcedureInput } from "@trpc/server";
 import type { AppRouter } from "../../server/api/root";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import {
   BasicInfo,
   Events,
@@ -80,7 +80,7 @@ const Index = () => {
   return (
     <form
       className="flex flex-col items-center"
-      onSubmit={async (e) => {
+      onSubmit={async (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(formData.name);
         type Input = inferProcedureInput<AppRouter["libRegistration"]["add"]>;
